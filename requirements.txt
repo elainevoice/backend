@@ -1,2 +1,4 @@
 SpeechRecognition
 pydub
+sounddevice
+soundfile
