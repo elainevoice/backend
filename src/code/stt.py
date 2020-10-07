@@ -10,11 +10,13 @@ from datetime import datetime, timedelta
 class SpeechToText:
     # def __init__(self):
     def find_last_modified_recording(self):
-        return max(glob.iglob(R"./src/assets/data/recordings/*.wav"), key=os.path.getmtime)
+        return max(
+            glob.iglob(R"./src/assets/data/recordings/*.wav"), key=os.path.getmtime
+        )
 
     def classify_wav(self, path=None):
         if path is None:
-            path = self.find_last_modified_recording() 
+            path = self.find_last_modified_recording()
 
         r = sr.Recognizer()
         try:

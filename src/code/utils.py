@@ -1,6 +1,7 @@
 import pathlib
 from pydub import AudioSegment
 
+
 class Utils:
     @staticmethod
     def mp3_to_wav():
