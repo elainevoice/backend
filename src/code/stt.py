@@ -5,11 +5,7 @@ import sounddevice as sd
 import soundfile as sf
 import speech_recognition as sr
 from datetime import datetime, timedelta
-from config import lang
-
-default_fs = 44100
-default_length_recording = 10
-
+from config import lang, default_fs, default_length_recording
 
 class SpeechToText:
     def _find_last_modified_recording(self):
