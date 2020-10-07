@@ -8,6 +8,7 @@
 `python -m venv venv`
 then activate venv
 
+then install req's
 `python -m pip install -r requirements.txt`
 
 ### Formatting
