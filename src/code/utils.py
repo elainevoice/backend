@@ -1,11 +1,5 @@
 import pathlib
 from pydub import AudioSegment
-from pathlib import Path
-
-
-def get_current_dir():
-    return Path.cwd()
-
 
 class Utils:
     @staticmethod
