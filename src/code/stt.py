@@ -7,9 +7,10 @@ import sounddevice as sd
 import soundfile as sf
 import speech_recognition as sr
 
+default_fs = 44100
+default_length_recording = 10
 
 class SpeechToText:
-    # def __init__(self):
     def _find_last_modified_recording(self):
         return max(
             glob.iglob(R"./src/assets/data/recordings/*.wav"), key=os.path.getmtime
@@ -50,8 +51,8 @@ class SpeechToText:
 
     def record_and_save_wav(
         self,
-        fs=44100,
-        second=10,
+        fs=default_fs,
+        second=default_length_recording,
         filename=f'recording_{str(datetime.now().strftime("%d-%m-%Y_%H-%M-%S"))}.wav',
     ):
 
@@ -70,4 +71,3 @@ class SpeechToText:
 
 stt = SpeechToText()
 stt.classify_wav()
-# stt.classify_wav()
