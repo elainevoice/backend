@@ -1,4 +1,7 @@
+from datetime import datetime
+
 from gtts import gTTS
+
 from config import lang
 
 text = str(input("What do you want to tts? "))
