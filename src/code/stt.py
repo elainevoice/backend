@@ -7,6 +7,8 @@ import sounddevice as sd
 import soundfile as sf
 import speech_recognition as sr
 
+from config import lang
+
 
 class SpeechToText:
     # def __init__(self):
@@ -38,7 +40,7 @@ class SpeechToText:
             raise e
 
         try:
-            txt = recognizer.recognize_google(audio, None, "nl_NL")
+            txt = recognizer.recognize_google(audio, None, lang)
             print(f"You said: {txt}")
             return txt
         except sr.UnknownValueError:
