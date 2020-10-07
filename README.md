@@ -1,6 +1,7 @@
+# Scripts
 ## This repo contains several scripts used for Elaine Voice
 
-# Install
+### Install
 `git clone <REPO>`
 `cd <FOLDER>`
 
@@ -8,7 +9,7 @@
 then activate venv
 `python -m pip install -r requirements.txt`
 
-# Formatting
+### Formatting
 `black .` for all files in and under dir
 `black <FILE>` for specific file
 
