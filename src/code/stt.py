@@ -13,17 +13,14 @@ class SpeechToText:
             glob.iglob(R"./src/assets/data/recordings/*.wav"), key=os.path.getmtime
         )
 
-    def _select_input_device(self):
+    def select_input_device(self):
         devices = sd.query_devices()
         input_d, _ = sd.default.device
 
-        print(f"devices: {devices}")
-        corr = "n"
-        while corr == "n":
-            input_d = int(input("Input correct input: "))
-            print(f"input: {devices[input_d]['name']}")
-            corr = input("input correct? (y/n) ")
-        sd.default.device = input_d
+        return {input_d: devices[input_d]['name']}, [{i: devices[i]['name']} for i in range(len(devices))]
+        
+    def set_input_device(self, input_device):
+        sd.default.device = input_device
 
     def classify_wav(self, path=None):
         path = self._find_last_modified_recording() if path is None else path
@@ -53,8 +50,6 @@ class SpeechToText:
         filename=f'recording_{str(datetime.now().strftime("%d-%m-%Y_%H-%M-%S"))}.wav',
     ):
 
-        self._select_input_device()
-
         save_path = f"./src/assets/data/recordings/{filename}"
         record_voice = sd.rec(int(second * fs), samplerate=fs, channels=2)
         sd.wait()
@@ -65,6 +60,3 @@ class SpeechToText:
         self.record_and_save_wav()
         self.classify_wav()
 
-
-stt = SpeechToText()
-stt.classify_wav()
