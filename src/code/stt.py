@@ -1,10 +1,11 @@
-import speech_recognition as sr
-import sounddevice as sd
-import soundfile as sf
-import pathlib
 import glob
 import os
+import pathlib
 from datetime import datetime, timedelta
+
+import sounddevice as sd
+import soundfile as sf
+import speech_recognition as sr
 
 
 class SpeechToText:
