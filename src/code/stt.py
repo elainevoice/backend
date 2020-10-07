@@ -1,14 +1,15 @@
 import glob
 import os
 import pathlib
-from datetime import datetime, timedelta
-
 import sounddevice as sd
 import soundfile as sf
 import speech_recognition as sr
+from datetime import datetime, timedelta
+from config import lang
 
 default_fs = 44100
 default_length_recording = 10
+
 
 class SpeechToText:
     def _find_last_modified_recording(self):
@@ -39,7 +40,7 @@ class SpeechToText:
             raise e
 
         try:
-            txt = recognizer.recognize_google(audio, None, "nl_NL")
+            txt = recognizer.recognize_google(audio, None, lang)
             print(f"You said: {txt}")
             return txt
         except sr.UnknownValueError:
