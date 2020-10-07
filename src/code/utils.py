@@ -1,9 +1,5 @@
 import pathlib
 from pydub import AudioSegment
-from pathlib import Path
-
-def get_current_dir():
-    return Path.cwd()
 
 class Utils:
 
@@ -20,4 +16,3 @@ class Utils:
             filename = str(path).split('\\')[-1].split('.')[0]
             dest = f"../assets/data/sounds_wav/words/{filename}.wav"
             sound.export(dest, format="wav")
-
