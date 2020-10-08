@@ -4,7 +4,7 @@ import pathlib
 import sounddevice as sd
 import soundfile as sf
 import speech_recognition as sr
-from datetime import datetime, timedelta
+from datetime import datetime
 from config import lang, default_fs, default_length_recording
 
 class SpeechToText:

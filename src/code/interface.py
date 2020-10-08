@@ -2,6 +2,7 @@ import sounddevice as sd
 
 from tkinter import *
 from stt import SpeechToText
+from tts import textToSpeech
 from audio_player import AudioPlayer
 from config import default_window_size, application_name, default_btn_width, default_btn_height, default_dropdown_width
 
@@ -10,12 +11,14 @@ class Interface:
     selected_input_device = None
     selected_output_device = None
     stt = None
+    tts = None
     ap = None
 
     def __init__(self, windowsize = default_window_size):
         self.gui = Tk(className = application_name)
         self.gui.geometry(windowsize)
         self.stt = SpeechToText()
+        self.tts = textToSpeech()
         self.ap = AudioPlayer()
 
     def start(self):
@@ -27,6 +30,7 @@ class Interface:
         
         def record():
             self.stt.record_and_classify()
+            self.tts.create_wav()
             self.ap.play_wav()
         
         # get data for gui
