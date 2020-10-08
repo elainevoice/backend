@@ -13,15 +13,6 @@ class SpeechToText:
             glob.iglob(R"./src/assets/data/recordings/*.wav"), key=os.path.getmtime
         )
 
-    def select_input_device(self):
-        devices = sd.query_devices()
-        input_d, _ = sd.default.device
-
-        return {input_d: devices[input_d]['name']}, [{i: devices[i]['name']} for i in range(len(devices))]
-        
-    def set_input_device(self, input_device):
-        sd.default.device = input_device
-
     def classify_wav(self, path=None):
         path = self._find_last_modified_recording() if path is None else path
 
