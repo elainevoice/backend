@@ -2,16 +2,21 @@ import sounddevice as sd
 
 from tkinter import *
 from stt import SpeechToText
+from audio_player import AudioPlayer
 from config import default_window_size, application_name, default_btn_width, default_btn_height, default_dropdown_width
 
 class Interface:
     gui = None
     selected_input_device = None
     selected_output_device = None
+    stt = None
+    ap = None
 
     def __init__(self, windowsize = default_window_size):
         self.gui = Tk(className = application_name)
         self.gui.geometry(windowsize)
+        self.stt = SpeechToText()
+        self.ap = AudioPlayer()
 
     def start(self):
         def confirm_input():
@@ -21,30 +26,31 @@ class Interface:
             self._set_output_device(int(outp.get().replace('{','').replace('}','')[0]))
         
         def record():
-            stt.record_and_classify()
+            self.stt.record_and_classify()
+            self.ap.play_wav()
         
-        stt = SpeechToText()
+        # get data for gui
         current_input_device, current_output_device, input_device, output_device = self._possible_device()
 
-        # create dropdown
+        # create input dropdown
         inp = StringVar(self.gui)
         inp.set(current_input_device)
         inp_drop = OptionMenu(self.gui, inp, *input_device)
         inp_drop.config(width=default_dropdown_width)
         inp_drop.pack()
 
-        # create confirm dropdown
+        # create input confirm
         confrm = Button(self.gui, text="Input Device", command=confirm_input, width=default_btn_width, height=default_btn_height)
         confrm.pack()
 
-        # create dropdown
+        # create output dropdown
         outp = StringVar(self.gui)
         outp.set(current_output_device)
         outp_drop = OptionMenu(self.gui, outp, *output_device)
         outp_drop.config(width=default_dropdown_width)
         outp_drop.pack()
 
-        # create confirm dropdown
+        # create output confirm
         confrm = Button(self.gui, text="Output Device", command=confirm_output, width=default_btn_width, height=default_btn_height)
         confrm.pack()    
 
