@@ -1,6 +1,7 @@
 import glob
 import os
 import pathlib
+import pyglet
 import sounddevice as sd
 import soundfile as sf
 
@@ -17,4 +18,5 @@ class AudioPlayer:
             sd.play(data, fs)
             status = sd.wait()
         except Exception as e:
-            raise e
+            m = pyglet.media.load(wav)
+            m.play()
