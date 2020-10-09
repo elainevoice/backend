@@ -1,6 +1,5 @@
 import glob
 import os
-import pathlib
 import pyglet
 import sounddevice as sd
 import soundfile as sf

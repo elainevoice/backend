@@ -12,3 +12,7 @@ then activate venv
 
 then install req's
 `python -m pip install -r requirements.txt`
+
+# Basic MVC Model
+
+Controller : routes.py

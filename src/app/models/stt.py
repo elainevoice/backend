@@ -1,11 +1,10 @@
 import glob
 import os
-import pathlib
 import sounddevice as sd
 import soundfile as sf
 import speech_recognition as sr
 from datetime import datetime
-from config import lang, default_fs, default_length_recording
+from app.config import lang, default_fs, default_length_recording
 
 class SpeechToText:
     def _find_last_modified_recording(self):
@@ -23,7 +22,6 @@ class SpeechToText:
 
         try:
             txt = recognizer.recognize_google(audio, None, lang)
-            print(f"You said: {txt}")
             return txt
         except sr.UnknownValueError:
             raise ValueError("Google Speech Recognition could not understand audio")
