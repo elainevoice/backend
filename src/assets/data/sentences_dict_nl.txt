@@ -1,0 +1,101 @@
+Ahmet is dood,sounds/sentences/ahmet_olmus.mp3
+Vergeet niet Ahmet te bellen,sounds/sentences/ahmeti_aramayi_unutma.mp3
+We hebben 's avonds gasten,sounds/sentences/aksam_misafirlerimiz_var.mp3
+je brandt in vuur,sounds/sentences/atesler_icinde_yaniyorsun.mp3
+je voeten zijn modderig,sounds/sentences/ayaklarn_camur_olmus.mp3
+Ik heb een gebakje gemaakt,sounds/sentences/borek_yaptim.mp3
+Er is vanavond een volle maan,sounds/sentences/bu_gece_dolunay_var.mp3
+Wat moet ik vandaag aantrekken?,sounds/sentences/bugun_ne_giysem.mp3
+Mijn beste kalkoen,sounds/sentences/canim_turkiyem.mp3
+Kwam je vader van de markt?,sounds/sentences/carsidan_baban_geldi_mi.mp3
+thee zetten,sounds/sentences/cay_demle.mp3
+doe je jas uit,sounds/sentences/ceketini_cikar_ceketini.mp3
+Laten we naar het begrafenisgebed gaan,sounds/sentences/cenaze_namazına_gidelim.mp3
+Er is een begrafenis,sounds/sentences/cenaze_var.mp3
+het kind is erg ziek,sounds/sentences/cocuk_cok_hasta.mp3
+waar zijn de kinderen,sounds/sentences/cocuklar_nerede.mp3
+kinderen kwamen niet terug van school,sounds/sentences/cocuklar_okuldan_donmedi.mp3
+ik heb zo'n honger,sounds/sentences/cok_aciktim.mp3
+ik ben erg misselijk,sounds/sentences/cok_hastayim.mp3
+te donker,sounds/sentences/cok_karanlik.mp3
+de bergen zijn te hoog,sounds/sentences/daglar_cok_yuksek.mp3
+waar is de bruidegom,sounds/sentences/damat_nerde.mp3
+doe voorzichtig,sounds/sentences/dikkat_et.mp3
+er is mist buiten,sounds/sentences/disarda_sis_var.mp3
+ga naar buiten,sounds/sentences/disari_cik.mp3
+Bel een dokter,sounds/sentences/doktor_cagirin.mp3
+het is bevroren,sounds/sentences/don_oldu.mp3
+er is een bruiloft,sounds/sentences/dugun_var.mp3
+laten we naar de bruiloft gaan,sounds/sentences/dugune_gidelim.mp3
+we hebben een bruiloft,sounds/sentences/dugunumuz_var.mp3
+Ik zou de wereld willen reizen,sounds/sentences/dunyayi_gezmek_isterim.mp3
+Hoorde je,sounds/sentences/duydunuz_mu.mp3
+kom brood halen,sounds/sentences/ekmek_al_gel.mp3
+het brood is erg lekker,sounds/sentences/ekmek_cok_guzel.mp3
+elektriciteit is uitgevallen,sounds/sentences/elektrikler_kesildi.mp3
+er was inflatie,sounds/sentences/enflasyon_oldu.mp3
+Ik hou zoveel van mijn man,sounds/sentences/esimi_cok_seviyorum.mp3
+Laten we de items verplaatsen,sounds/sentences/esyalari_tasiyalim.mp3
+geef de bloemen in huis water,sounds/sentences/evdeki_cicekleri_sula.mp3
+huizen onder de sneeuw,sounds/sentences/evler_kar_altinda.mp3
+de prijzen van hazelnoten zijn gedaald,sounds/sentences/findik_fiyatlari_dustu.mp3
+Laten we hazelnoten gaan verzamelen,sounds/sentences/findik_toplamaya_gidelim.mp3
+we gaan hazelnoten verzamelen,sounds/sentences/findik_toplamaya_gidiyoruz.mp3
+schrijft in de krant,sounds/sentences/gazetede_yaziyor.mp3
+bruid is zwanger,sounds/sentences/gelin_hamile.mp3
+de lucht zal bewolkt regenen,sounds/sentences/gokyuzu_kapali_yagmur_yagacak.mp3
+Tot ziens,sounds/sentences/gorusmek_uzere.mp3
+Haar ogen zijn erg mooi,sounds/sentences/gozleri_cok_guzel.mp3
+Het is zo mooi weer vandaag,sounds/sentences/hava_bugun_cok_guzel.mp3
+het weer is heel mooi,sounds/sentences/havalar_cok_sogudu.mp3
+breng het dier,sounds/sentences/hayvani_getir.mp3
+Ik heb cadeaus gekocht,sounds/sentences/hediyeler_aldim.mp3
+overal is groen,sounds/sentences/her_yer_yemyesil.mp3
+de hanen kraaien, het is ochtend,sounds/sentences/horozlar_otuyor_sabah_oldu.mp3
+Ga vooruit,sounds/sentences/ileri_git.mp3
+Laten we koffie drinken,sounds/sentences/kahve_icelim.mp3
+vergeet niet uw deur op slot te doen,sounds/sentences/kapini_kilitlemeyi_unutma.mp3
+veel sneeuw,sounds/sentences/kar_cok.mp3
+Het sneeuwt,sounds/sentences/kar_yagiyor.mp3
+gladde weg,sounds/sentences/kaygan_yol.mp3
+ons dorp verscheen in de boeken,sounds/sentences/kitaplarda_koyumuz_cikti.mp3
+meisje gaat trouwen,sounds/sentences/kiz_evlendiriyoruz.mp3
+Ze zullen om een ​​meisje komen vragen,sounds/sentences/kiz_istemeye_gelecekler.mp3
+mijn man kwam laat thuis,sounds/sentences/kocam_eve_gec_geldi.mp3
+dorpsweg is afgesloten,sounds/sentences/koy_yolu_kapali.mp3
+Je pakt het ei uit het hok,sounds/sentences/kumesten_yumurtayi_sen_al.mp3
+doe de lamp aan,sounds/sentences/lambayi_ac.mp3
+doe de lamp uit,sounds/sentences/lambayi_kapat.mp3
+Er zijn gasten,sounds/sentences/misafir_var.mp3
+Ze had een dochter als nurtopu,sounds/sentences/nurtopu_gibi_bir_kizi_oldu.mp3
+breken hout,sounds/sentences/odun_kir.mp3
+Ik breek het hout,sounds/sentences/odunlari_kiriyorum.mp3
+Ik kwam van school,sounds/sentences/okuldan_geldim.mp3
+geld verdienen is goed,sounds/sentences/para_kazanmak_guzel.mp3
+hoe laat is het,sounds/sentences/saat_kac.mp3
+er is een epidemie,sounds/sentences/salgin_hastalik_var.mp3
+vorst raakte de groente,sounds/sentences/sebzeye_don_vurdu.mp3
+er was een overstroming,sounds/sentences/sel_oldu.mp3
+service is net aangekomen,sounds/sentences/servis_yeni_geldi.mp3
+Ik ben laat bij de dienst,sounds/sentences/servise_gec_kaldim.mp3
+het werd mist,sounds/sentences/sis_oldu.mp3
+we komen naar je toe,sounds/sentences/size_gelecegiz.mp3
+Ik heb net de melk gemolken,sounds/sentences/sutu_yeni_sagdim.mp3
+drink jij je melk,sounds/sentences/sutunu_icer_misin.mp3
+ploeg het veld,sounds/sentences/tarlayi_sur.mp3
+drink je verse melk,sounds/sentences/taze_sut_icer_misin.mp3
+kijk naar de telefoon,sounds/sentences/telefona_baksana.mp3
+Geef me de telefoon,sounds/sentences/telefonu_ver.mp3
+ga naar je tante,sounds/sentences/teyzene_git.mp3
+verzamelen we gaan samen,sounds/sentences/toplanin_hep_birlikte_gidiyoruz.mp3
+Heb je het veld geploegd met een tractor?,sounds/sentences/traktorle_tarlayi_surdun_mu.mp3
+toeristen komen eraan,sounds/sentences/turistler_geliyor.mp3
+de regen valt heel goed,sounds/sentences/yagmur_cok_guzel_yagiyor.mp3
+de hellingen zijn erg steil,sounds/sentences/yamaclar_cok_dik.mp3
+er is een brand,sounds/sentences/yangin_var.mp3
+helpen,sounds/sentences/yardim_edin.mp3
+ik heb hulp nodig,sounds/sentences/yardim_lazim.mp3
+Morgen gaat het regenen,sounds/sentences/yarin_yagmurlu_olacak.mp3
+we wachten weer,sounds/sentences/yine_bekleriz.mp3
+er is een reis,sounds/sentences/yolculuk_var.mp3
+De weg is geblokkeerd,sounds/sentences/yollar_kapali.mp3
