@@ -25,27 +25,12 @@ class Utils:
 
         directory = "../assets/data/sounds_wav/sentences"
         for filename in os.listdir(directory):
-            print(filename)
             turks = filename[:-4].lower()
             match = sentences.loc[sentences['turks'] == f"sounds/sentences/{turks}.mp3"]
-            print(match)
             nederlands = match['nederlands'].item().replace(' ', '_')
-
-            print(nederlands)
             old_file = os.path.join(directory, filename)
             new_filename = old_file.replace(turks, nederlands)
             try:
                 os.rename(old_file, new_filename)
             except:
                 pass
-
-        """
-        for path in pathlib.Path("../assets/data/sounds_wav/words").iterdir():
-            turks = path.stem
-            ned = words[words['turks'].str.contains(turks)]
-            print(ned)
-        """
-
-
-
-Utils.rename_wav()
