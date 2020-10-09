@@ -1,13 +1,12 @@
 import sounddevice as sd
-import config 
+import tkinter as tk
 
-from tkinter import *
+import config 
 from stt import SpeechToText
 from tts import textToSpeech
 from audio_player import AudioPlayer
 
-
-class Interface:
+class GUI:
     gui = None
     selected_input_device = None
     selected_output_device = None
@@ -16,7 +15,7 @@ class Interface:
     ap = None
 
     def __init__(self, windowsize = config.default_window_size):
-        self.gui = Tk(className = config.application_name)
+        self.gui = tk.Tk(className = config.application_name)
         self.gui.geometry(windowsize)
         self.stt = SpeechToText()
         self.tts = textToSpeech()
@@ -57,7 +56,7 @@ class Interface:
         rec = self._create_button("Record",record)
         rec.pack()
 
-        mainloop() 
+        tk.mainloop() 
     
     def _possible_device(self):
         devices = sd.query_devices()
@@ -80,14 +79,14 @@ class Interface:
         sd.default.device = self.selected_input_device, o_d
 
     def _create_dropdown(self, current, options):
-        var = StringVar(self.gui)
+        var = tk.StringVar(self.gui)
         var.set(current)
-        drop = OptionMenu(self.gui, var, *options)
+        drop = tk.OptionMenu(self.gui, var, *options)
         drop.config(width=config.default_dropdown_width)
         return var, drop
 
     def _create_button(self, text, command):
-        return Button(self.gui, text=text, command=command, width=config.default_btn_width, height=config.default_btn_height)
+        return tk.Button(self.gui, text=text, command=command, width=config.default_btn_width, height=config.default_btn_height)
 
-i = Interface()
+i = GUI()
 i.start()

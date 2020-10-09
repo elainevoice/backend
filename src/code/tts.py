@@ -17,11 +17,7 @@ class textToSpeech:
         stt = SpeechToText()
         return stt.classify_wav()
 
-    def create_wav(
-        self,
-        text = None,
-        filename=f'result_{str(datetime.now().strftime("%d-%m-%Y_%H-%M-%S"))}.wav',
-    ):
+    def create_wav(self,text = None,filename=f'result_{str(datetime.now().strftime("%d-%m-%Y_%H-%M-%S"))}.wav'):
         text = self._classify_last_modified_wav() if text is None else text
         save_path = f"./src/assets/data/results/{filename}"
         speechResult = gTTS(text=text, lang= lang, slow=False)

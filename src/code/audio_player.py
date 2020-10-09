@@ -6,10 +6,9 @@ import sounddevice as sd
 import soundfile as sf
 
 class AudioPlayer:
+    count = 0
     def _find_last_modified_result(self):
-        return max(
-            glob.iglob(R"./src/assets/data/results/*.wav"), key=os.path.getmtime
-        )
+        return max(glob.iglob(R"./src/assets/data/results/*.wav"), key=os.path.getmtime)
     
     def play_wav(self, wav = None):
         try:
