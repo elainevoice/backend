@@ -23,11 +23,11 @@ class Utils:
         words = pd.read_csv('../assets/data/words_dict_nl.csv')
         sentences = pd.read_csv('../assets/data/sentences_dict_nl.csv')
 
-        directory = "../assets/data/sounds_wav/words"
+        directory = "../assets/data/sounds_wav/sentences"
         for filename in os.listdir(directory):
             print(filename)
             turks = filename[:-4].lower()
-            match = words.loc[words['turks'] == f"sounds/words/{turks}.mp3"]
+            match = sentences.loc[sentences['turks'] == f"sounds/sentences/{turks}.mp3"]
             print(match)
             nederlands = match['nederlands'].item().replace(' ', '_')
 
