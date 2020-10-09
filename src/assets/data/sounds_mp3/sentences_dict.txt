@@ -1,0 +1,101 @@
+ahmet ölmüş,sounds/sentences/ahmet_olmus.mp3
+ahmet'i aramayı unutma,sounds/sentences/ahmeti_aramayi_unutma.mp3
+akşam misafirlerimiz var,sounds/sentences/aksam_misafirlerimiz_var.mp3
+ateşler içinde yanıyorsun,sounds/sentences/atesler_icinde_yaniyorsun.mp3
+ayakların çamur olmuş,sounds/sentences/ayaklarn_camur_olmus.mp3
+börek yaptım,sounds/sentences/borek_yaptim.mp3
+bu gece dolunay var,sounds/sentences/bu_gece_dolunay_var.mp3
+bugün ne giysem,sounds/sentences/bugun_ne_giysem.mp3
+canım türkiyem,sounds/sentences/canim_turkiyem.mp3
+çarşıdan baban geldi mi,sounds/sentences/carsidan_baban_geldi_mi.mp3
+çay demle,sounds/sentences/cay_demle.mp3
+ceketini çıkar ceketini,sounds/sentences/ceketini_cikar_ceketini.mp3
+cenaze namazına gidelim,sounds/sentences/cenaze_namazına_gidelim.mp3
+cenaze var,sounds/sentences/cenaze_var.mp3
+çocuk çok hasta,sounds/sentences/cocuk_cok_hasta.mp3
+çocuklar nerede,sounds/sentences/cocuklar_nerede.mp3
+çocuklar okuldan dönmedi,sounds/sentences/cocuklar_okuldan_donmedi.mp3
+çok acıktım,sounds/sentences/cok_aciktim.mp3
+çok hastayım,sounds/sentences/cok_hastayim.mp3
+çok karanlık,sounds/sentences/cok_karanlik.mp3
+dağlar çok yüksek,sounds/sentences/daglar_cok_yuksek.mp3
+damat nerede,sounds/sentences/damat_nerde.mp3
+dikkat et,sounds/sentences/dikkat_et.mp3
+dışarda sis var,sounds/sentences/disarda_sis_var.mp3
+dışarı çık,sounds/sentences/disari_cik.mp3
+doktor çağırın,sounds/sentences/doktor_cagirin.mp3
+don oldu,sounds/sentences/don_oldu.mp3
+düğün var,sounds/sentences/dugun_var.mp3
+düğüne gidelim,sounds/sentences/dugune_gidelim.mp3
+düğünümüz var,sounds/sentences/dugunumuz_var.mp3
+dünyayı gezmek isterim,sounds/sentences/dunyayi_gezmek_isterim.mp3
+duydunuz mu,sounds/sentences/duydunuz_mu.mp3
+ekmek al gel,sounds/sentences/ekmek_al_gel.mp3
+ekmek çok güzel,sounds/sentences/ekmek_cok_guzel.mp3
+elektrikler kesildi,sounds/sentences/elektrikler_kesildi.mp3
+enflasyon oldu,sounds/sentences/enflasyon_oldu.mp3
+eşimi çok seviyorum,sounds/sentences/esimi_cok_seviyorum.mp3
+eşyaları taşıyalım,sounds/sentences/esyalari_tasiyalim.mp3
+evdeki çiçekleri sula,sounds/sentences/evdeki_cicekleri_sula.mp3
+evler kar altında,sounds/sentences/evler_kar_altinda.mp3
+fındık fiyatları düştü,sounds/sentences/findik_fiyatlari_dustu.mp3
+fındık toplamaya gidelim,sounds/sentences/findik_toplamaya_gidelim.mp3
+fındık toplamaya gidiyoruz,sounds/sentences/findik_toplamaya_gidiyoruz.mp3
+gazetede yazıyor,sounds/sentences/gazetede_yaziyor.mp3
+gelin hamile,sounds/sentences/gelin_hamile.mp3
+gökyüzü kapalı yağmur yağacak,sounds/sentences/gokyuzu_kapali_yagmur_yagacak.mp3
+görüşmek üzere,sounds/sentences/gorusmek_uzere.mp3
+gözleri çok güzel,sounds/sentences/gozleri_cok_guzel.mp3
+hava bugün çok güzel,sounds/sentences/hava_bugun_cok_guzel.mp3
+havalar çok güzel,sounds/sentences/havalar_cok_sogudu.mp3
+hayvanı getir,sounds/sentences/hayvani_getir.mp3
+hediyeler aldım,sounds/sentences/hediyeler_aldim.mp3
+her yer yemyeşil,sounds/sentences/her_yer_yemyesil.mp3
+horozlar ötüyor sabah oldu,sounds/sentences/horozlar_otuyor_sabah_oldu.mp3
+ileri git,sounds/sentences/ileri_git.mp3
+kahve içelim,sounds/sentences/kahve_icelim.mp3
+kapını kilitlemeyi unutma,sounds/sentences/kapini_kilitlemeyi_unutma.mp3
+kar çok,sounds/sentences/kar_cok.mp3
+kar yağıyor,sounds/sentences/kar_yagiyor.mp3
+kaygan yol,sounds/sentences/kaygan_yol.mp3
+kitaplarda köyümüz çıktı,sounds/sentences/kitaplarda_koyumuz_cikti.mp3
+kız evlendiriyoruoz,sounds/sentences/kiz_evlendiriyoruz.mp3
+kız istemeye gelecekler,sounds/sentences/kiz_istemeye_gelecekler.mp3
+kocam eve geç geldi,sounds/sentences/kocam_eve_gec_geldi.mp3
+köy yolu kapalı,sounds/sentences/koy_yolu_kapali.mp3
+kümesten yumurtayı sen al,sounds/sentences/kumesten_yumurtayi_sen_al.mp3
+lambayı aç,sounds/sentences/lambayi_ac.mp3
+lambayı kapat,sounds/sentences/lambayi_kapat.mp3
+misafir var,sounds/sentences/misafir_var.mp3
+nurtopu gibi bir kızı oldu,sounds/sentences/nurtopu_gibi_bir_kizi_oldu.mp3
+odun kır,sounds/sentences/odun_kir.mp3
+odunları kırıyorum,sounds/sentences/odunlari_kiriyorum.mp3
+okuldan geldim,sounds/sentences/okuldan_geldim.mp3
+para kazanmak güzel,sounds/sentences/para_kazanmak_guzel.mp3
+saat kaç,sounds/sentences/saat_kac.mp3
+salgın hastalık var,sounds/sentences/salgin_hastalik_var.mp3
+sebzeye don vurdu,sounds/sentences/sebzeye_don_vurdu.mp3
+sel oldu,sounds/sentences/sel_oldu.mp3
+servis yeni geldi,sounds/sentences/servis_yeni_geldi.mp3
+servise geç kaldım,sounds/sentences/servise_gec_kaldim.mp3
+sis oldu,sounds/sentences/sis_oldu.mp3
+size geleceğiz,sounds/sentences/size_gelecegiz.mp3
+sütü yeni sağdım,sounds/sentences/sutu_yeni_sagdim.mp3
+sütünü içer misin,sounds/sentences/sutunu_icer_misin.mp3
+tarlayı sür,sounds/sentences/tarlayi_sur.mp3
+taze süt içer misin,sounds/sentences/taze_sut_icer_misin.mp3
+telefona baksana,sounds/sentences/telefona_baksana.mp3
+telefonu ver,sounds/sentences/telefonu_ver.mp3
+teyzene git,sounds/sentences/teyzene_git.mp3
+toplanın hep birlikte gidiyoruz,sounds/sentences/toplanin_hep_birlikte_gidiyoruz.mp3
+traktörle tarlayı sürdün mü,sounds/sentences/traktorle_tarlayi_surdun_mu.mp3
+turistler geliyor,sounds/sentences/turistler_geliyor.mp3
+yağmur çok güzel yağıyor,sounds/sentences/yagmur_cok_guzel_yagiyor.mp3
+yamaçlar çok dik,sounds/sentences/yamaclar_cok_dik.mp3
+yangın var,sounds/sentences/yangin_var.mp3
+yardım edin,sounds/sentences/yardim_edin.mp3
+yardım lazım,sounds/sentences/yardim_lazim.mp3
+yarın yağmurlu olacak,sounds/sentences/yarin_yagmurlu_olacak.mp3
+yine bekleriz,sounds/sentences/yine_bekleriz.mp3
+yolculuk var,sounds/sentences/yolculuk_var.mp3
+yollar kapalı,sounds/sentences/yollar_kapali.mp3
