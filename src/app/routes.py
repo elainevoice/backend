@@ -1,5 +1,3 @@
-import os
-
 from flask import Response, request, send_file
 
 from app import app, controller

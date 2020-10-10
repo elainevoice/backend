@@ -1,5 +1,4 @@
 import io
-import os
 from datetime import datetime
 
 import sounddevice as sd

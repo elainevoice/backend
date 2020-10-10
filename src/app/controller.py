@@ -1,4 +1,3 @@
-from app import config
 from app.models.stt import sttAdapter
 from app.models.tts import ttsAdapter
 

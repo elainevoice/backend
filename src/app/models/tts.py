@@ -1,6 +1,7 @@
-from gtts import gTTS
 from datetime import datetime
+
 from app.config import lang
+from gtts import gTTS
 
 
 class _textToSpeech:
