@@ -2,14 +2,15 @@ from app.models.stt import sttAdapter
 from app.models.tts import ttsAdapter
 
 
-def stt_recognize_binary_audio_on_disk(binary_audio):
+def stt_recognize_binary_audio_on_disk(spooled_temp_file):
     stt_adapter = sttAdapter()
-    return stt_adapter.recognize_audio_disk(binary_audio)
+    path_name, text = stt_adapter.recognize_audio_disk(spooled_temp_file)
+    return path_name, text
 
 
-def stt_recognize_binary_audio_in_memory(binary_audio):
+def stt_recognize_binary_audio_in_memory(spooled_temp_file):
     stt_adapter = sttAdapter()
-    return stt_adapter.recognize_audio_memory(binary_audio)
+    return stt_adapter.recognize_audio_memory(spooled_temp_file)
 
 
 def tts_create_audio_from_text(text):

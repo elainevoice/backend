@@ -1,4 +1,5 @@
 import io
+import shutil
 from datetime import datetime
 
 import sounddevice as sd
@@ -19,54 +20,43 @@ class _SpeechToText:
             raise Exception(
                 f"Could not request results from Google Speech Recognition service: {e}")
 
-    def recognize_wav(self, audio_data):
+    def recognize_wav(self, spooled_temp_file):
         recognizer = sr.Recognizer()
         try:
-            with sr.WavFile(audio_data) as source:
-                audio = recognizer.record(source)
+            with sr.WavFile(spooled_temp_file) as audio_data:
+                audio = recognizer.record(audio_data)
         except Exception as e:
             raise e
         return self._recognize_audio(recognizer, audio)
 
-    def _record_and_save_wav(self, fs=default_fs, second=default_length_recording, filename=f'recording_{str(datetime.now().strftime("%d-%m-%Y_%H-%M-%S"))}.wav',):
-        save_path = f"./src/assets/data/recordings/{filename}"
-        record_voice = sd.rec(int(second * fs), samplerate=fs, channels=2)
-        sd.wait()
-        sf.write(save_path, record_voice, fs)
-        print(f"Saved at: {save_path}")
 
-    def record_and_recognize_wav(self):
-        self._record_and_save_wav()
-        self.recognize_wav()
 
 
 class sttAdapter:
     def __init__(self):
         self.stt = _SpeechToText()
 
-    def _recognize_wav(self, audio_data):
-        return self.stt.recognize_wav(audio_data
-                                      )
-
-    def recognize_audio_memory(self, binary_audio):
+    def recognize_audio_memory(self, spooled_temp_file):
         try:
-            buffer = io.BytesIO(binary_audio)
-            buffer.seek(0)
-            text = self._recognize_wav(buffer)
+            text = self.stt.recognize_wav(spooled_temp_file)
         except Exception as e:
-            raise Exception(
-                "Something went wrong trying to recognize audio file from memory")
+            raise Exception(e)
         finally:
-            buffer.close()
+            spooled_temp_file.close()
         return text
 
-    def recognize_audio_disk(self, binary_audio, file_name=f'recording_{str(datetime.now().strftime("%d-%m-%Y_%H-%M-%S"))}.wav'):
+    # Linelenght 135 yikes
+    def recognize_audio_disk(self, spooled_temp_file, file_name=f'recording_{str(datetime.now().strftime("%d-%m-%Y_%H-%M-%S"))}.wav'):
         try:
-            with open(f".\src\\assets\data\\recordings\\{file_name}", 'wb+') as file:
-                file.write(binary_audio)
-            text = self._recognize_wav(file.name)
+            destination = f".\src\\assets\data\\recordings\\{file_name}"
+            with open(destination, 'wb+') as file:
+                # Kon nergens goed vinden hoe memory intensive dit is, dus misschien moet dit in chunks maar idk
+                file.write(spooled_temp_file.read())
+                text = self.stt.recognize_wav(destination)
         except Exception as e:
             print(e)
         finally:
+            spooled_temp_file.close()
             file.close()
-        return text
+        print(text)
+        return destination, text
