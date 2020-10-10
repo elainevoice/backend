@@ -13,9 +13,8 @@ then activate venv
 then install req's
 `python -m pip install -r requirements.txt`
 
+then move to folder of code
+`cd src`
+
 then start api
-`python src/api.py`
-
-# Basic MVC Model
-
-Controller : routes.py
+`uvicorn main:app`

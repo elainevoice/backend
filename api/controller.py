@@ -1,5 +1,5 @@
-from app.models.stt import sttAdapter
-from app.models.tts import ttsAdapter
+from api.models.stt import sttAdapter
+from api.models.tts import ttsAdapter
 
 
 def stt_recognize_binary_audio_on_disk(spooled_temp_file):

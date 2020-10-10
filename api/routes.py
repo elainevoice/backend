@@ -2,12 +2,11 @@ from fastapi import APIRouter, File, HTTPException, UploadFile
 from fastapi.responses import (FileResponse, HTMLResponse, JSONResponse,
                                PlainTextResponse)
 
-from app import app, controller
-from app.config import application_name
+from main import app
+from api import controller
+from api.config import application_name
 
 router = APIRouter()
-# Todo in memory file obje2ct!
-
 
 @router.get("/", response_class=HTMLResponse)
 def home():

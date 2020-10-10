@@ -5,7 +5,7 @@ from datetime import datetime
 import sounddevice as sd
 import soundfile as sf
 import speech_recognition as sr
-from app.config import default_fs, default_length_recording, lang
+from api.config import default_fs, default_length_recording, lang
 
 
 class _SpeechToText:
@@ -48,7 +48,7 @@ class sttAdapter:
     # Linelenght 135 yikes
     def recognize_audio_disk(self, spooled_temp_file, file_name=f'recording_{str(datetime.now().strftime("%d-%m-%Y_%H-%M-%S"))}.wav'):
         try:
-            destination = f".\src\\assets\data\\recordings\\{file_name}"
+            destination = f"./assets/data/results/{filename}"
             with open(destination, 'wb+') as file:
                 # Kon nergens goed vinden hoe memory intensive dit is, dus misschien moet dit in chunks maar idk
                 file.write(spooled_temp_file.read())
