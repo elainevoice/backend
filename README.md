@@ -1,6 +1,6 @@
 # Scripts
 
-## This repo contains several scripts used for Elaine Voice
+## This repo contains api of Elaine Voice
 
 ### Install
 
@@ -12,9 +12,6 @@ then activate venv
 
 then install req's
 `python -m pip install -r requirements.txt`
-
-then move to folder of code
-`cd src`
 
 then start api
 `uvicorn main:app`
