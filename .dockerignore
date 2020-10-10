@@ -5,10 +5,25 @@ venv
 .gitingore
 .idea/
 .vscode/
-
+**/*.pyc
 **/[Dd]esktop.ini*
 
+.git/
 
+build
+dist
+*.egg-info
+*.egg/
+*.pyc
+*.swp
+
+.tox
+.coverage
+html/*
+__pycache__
+
+# Compiled Documentation
+docs/_build
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
