@@ -15,3 +15,6 @@ then install req's
 
 then start api
 `uvicorn main:app`
+
+or start it with watch/live-reload
+`uvicorn main:app --reload`

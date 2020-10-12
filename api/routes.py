@@ -5,7 +5,7 @@ from fastapi.responses import (FileResponse, HTMLResponse, JSONResponse,
 from main import app
 from api import controller
 from api.config import application_name
-
+from starlette.requests import Request
 router = APIRouter()
 
 @router.get("/", response_class=HTMLResponse)
@@ -42,9 +42,10 @@ def post_recording_memory(file: UploadFile = File(...)):
         raise HTTPException(status_code=418, detail=str(e))
 
 
-@router.get('/create_audio')
+@router.post('/create_audio')
 def create_audio_from_text(text: str):
     try:
+        print(text)
         audio_path = controller.tts_create_audio_from_text(text)
 
         return FileResponse(audio_path)
@@ -52,3 +53,19 @@ def create_audio_from_text(text: str):
     except Exception as e:
         print(e)
         raise HTTPException(status_code=418, detail=str(e))
+
+@router.post('/crack_create_audio')
+def crack_create_audio_from_text(text: str, request: Request):
+    try:
+        print(text)
+        audio_path = controller.tts_create_audio_from_text(text)
+
+        return str(request.url).split('/crack_create')[0] + "/crack_audio_oplossing?audio_name="+ audio_path
+    # To do  test what exceptions to actually catch
+    except Exception as e:
+        print(e)
+        raise HTTPException(status_code=418, detail=str(e))
+
+@router.get('/crack_audio_oplossing')
+def crack_audio_oplossing(audio_name: str):
+    return FileResponse(audio_name)
