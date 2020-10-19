@@ -5,14 +5,13 @@ from datetime import datetime
 import sounddevice as sd
 import soundfile as sf
 import speech_recognition as sr
-from api.config import default_fs, default_length_recording, lang
+from api.config import lang
 
 
 class _SpeechToText:
     def _recognize_audio(self, recognizer, audio):
         try:
-            txt = recognizer.recognize_google(audio, None, lang)
-            return txt
+            return recognizer.recognize_google(audio, None, lang)
         except sr.UnknownValueError:
             raise ValueError(
                 "Google Speech Recognition could not understand audio")
@@ -28,8 +27,6 @@ class _SpeechToText:
         except Exception as e:
             raise e
         return self._recognize_audio(recognizer, audio)
-
-
 
 
 class sttAdapter:
@@ -48,7 +45,7 @@ class sttAdapter:
     # Linelenght 135 yikes
     def recognize_audio_disk(self, spooled_temp_file, file_name=f'recording_{str(datetime.now().strftime("%d-%m-%Y_%H-%M-%S"))}.wav'):
         try:
-            destination = f"./assets/data/results/{filename}"
+            destination = f"./assets/data/results/{file_name}"
             with open(destination, 'wb+') as file:
                 # Kon nergens goed vinden hoe memory intensive dit is, dus misschien moet dit in chunks maar idk
                 file.write(spooled_temp_file.read())
@@ -58,5 +55,4 @@ class sttAdapter:
         finally:
             spooled_temp_file.close()
             file.close()
-        print(text)
         return destination, text

@@ -18,3 +18,8 @@ then start api
 
 or start it with watch/live-reload
 `uvicorn main:app --reload`
+
+# TODO:
+
+in routes: tts returns var names text, rename this
+are private/\_ classes a thing?

@@ -25,8 +25,7 @@ def post_recording_disk(file: UploadFile = File(...)):
         })
     # To do  test what exceptions to actually catch
     except Exception as e:
-        print(e)
-        raise HTTPException(status_code=418,
+        raise HTTPException(status_code=500,
                             detail="Something went wrong")
 
 # Niet helemaal in memory want als UploadFile te groot is wordt het op schijf opgeslagen, zie https://fastapi.tiangolo.com/tutorial/request-files/
@@ -39,32 +38,26 @@ def post_recording_memory(file: UploadFile = File(...)):
         return PlainTextResponse(text)
     # To do  test what exceptions to actually catch
     except Exception as e:
-        raise HTTPException(status_code=418, detail=str(e))
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 @router.post('/create_audio')
 def create_audio_from_text(text: str):
     try:
-        print(text)
         audio_path = controller.tts_create_audio_from_text(text)
-
         return FileResponse(audio_path)
     # To do  test what exceptions to actually catch
     except Exception as e:
-        print(e)
-        raise HTTPException(status_code=418, detail=str(e))
+        raise HTTPException(status_code=500, detail=str(e))
 
 @router.post('/crack_create_audio')
 def crack_create_audio_from_text(text: str, request: Request):
     try:
-        print(text)
         audio_path = controller.tts_create_audio_from_text(text)
-
         return str(request.url).split('/crack_create')[0] + "/crack_audio_oplossing?audio_name="+ audio_path
     # To do  test what exceptions to actually catch
     except Exception as e:
-        print(e)
-        raise HTTPException(status_code=418, detail=str(e))
+        raise HTTPException(status_code=500, detail=str(e))
 
 @router.get('/crack_audio_oplossing')
 def crack_audio_oplossing(audio_name: str):

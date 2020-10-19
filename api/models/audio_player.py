@@ -15,7 +15,7 @@ class AudioPlayer:
             wav = find_last_modified_result() if wav is None else wav
             data, fs = sf.read(wav, dtype='float32')
             sd.play(data, fs)
-            status = sd.wait()
+            sd.wait()
         except Exception as e:
             m = pyglet.media.load(wav)
             m.play()
