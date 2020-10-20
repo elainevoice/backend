@@ -1,12 +1,10 @@
 import numpy as np
 import pandas as pd
-import pydub
 
-from keras.layers import Dense, LSTM, LeakyReLU
-from keras.models import Sequential, load_model
 from scipy.io.wavfile import read, write
 from tensorflow import keras
 from datetime import datetime
+
 
 class Predict:
     models = []
@@ -23,14 +21,14 @@ class Predict:
         if len(df.columns.values) < 2:
             df[1] = df[0]
         elif len(df.columns.values) > 2:
-            raise Exception(f"there are to many columns. columns: {df.columns.values} ")
+            raise Exception(f"there are too many columns. columns: {df.columns.values} ")
         return df
     
-    def _create_test_dataset(self, df, look_back = 3, train=False):
+    def _create_test_dataset(self, df, look_back=3):
         data = [[] for i in range(len(df.columns.values))]
         for i in range(len(df)-look_back-1):
-            for i in range(len(data)):
-                data[i].append(df.iloc[i : i + look_back, i].values)
+            for j in range(len(data)):
+                data[i].append(df.iloc[i: i + look_back, j].values)
 
         res = []
         for i in data:
@@ -38,14 +36,14 @@ class Predict:
         return res
 
     def _test_dataset(self, df, start, limit):
-        tests = self._create_test_dataset(pd.concat([df.iloc[start+1 : limit, :],df.iloc[start+1 : limit, :]], axis=0))
+        tests = self._create_test_dataset(pd.concat([df.iloc[start+1: limit, :], df.iloc[start+1: limit, :]], axis=0))
 
         # reshape
         for i in range(len(tests)):
-           tests[i] = tests[i].reshape((-1, 1, 3))
+            tests[i] = tests[i].reshape((-1, 1, 3))
         return tests
 
-    def predict(self, location, file_name = f'model_result_{str(datetime.now().strftime("%d-%m-%Y_%H-%M-%S"))}.wav'):
+    def predict(self, location, file_name=f'model_result_{str(datetime.now().strftime("%d-%m-%Y_%H-%M-%S"))}.wav'):
         r, inp = self._read_file(location)
         df = pd.DataFrame(inp)
 
@@ -60,6 +58,7 @@ class Predict:
             predictions.append(self.models[i].predict(tests[i]))
 
         write(f'..\scripts\output\{file_name}', r, pd.concat([pd.DataFrame(predictions[0].astype('int16')), pd.DataFrame(predictions[1].astype('int16'))], axis=1).values)
+
 
 p = Predict([R'..\scripts\models\rnn1.h5', R'..\scripts\models\rnn2.h5'])
 p.predict(R'..\scripts\assets\data\recordings\YAF_death_ps.wav')
