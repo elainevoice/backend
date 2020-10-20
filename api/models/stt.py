@@ -1,9 +1,5 @@
-import io
-import shutil
 from datetime import datetime
 
-import sounddevice as sd
-import soundfile as sf
 import speech_recognition as sr
 from api.config import lang
 

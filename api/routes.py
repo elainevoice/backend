@@ -2,7 +2,6 @@ from fastapi import APIRouter, File, HTTPException, UploadFile
 from fastapi.responses import (FileResponse, HTMLResponse, JSONResponse,
                                PlainTextResponse)
 
-from main import app
 from api import controller
 from api.config import application_name
 from starlette.requests import Request
