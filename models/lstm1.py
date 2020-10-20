@@ -21,20 +21,22 @@ class LSTM1:
     rate = None
     df = None
 
+    def get_files(self, directory):
+        files = []
+        i = 0
+        for filename in os.listdir(directory):
+            rate, music = read(f"{directory}/{filename}")
+            files.append([i, rate, music])
+            i += 1
+        return files
+
     def load_data(self):
         df = pd.DataFrame()
-        filenames = []
-        directory = "../assets/data/sounds_wav/sentences"
-        for filename in os.listdir(directory):
-            filenames.append(filename)
-            self.rate, music1 = read(f"{directory}/{filename}")
-            print(music1)
-            music1 = pd.DataFrame(music1)
-            df = df.append(music1)
-            print(df)
 
-        df['filename'] = filenames
-        self.df = df
+        data = self.get_files("../assets/data/sounds_wav/words")
+        data += self.get_files("../assets/data/sounds_wav/sentences")
+
+        self.df = pd.DataFrame(data, columns=['name', 'rate', 'data'])
         print(self.df)
 
         """
