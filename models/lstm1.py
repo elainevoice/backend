@@ -23,16 +23,14 @@ class LSTM1:
 
     def get_files(self, directory):
         files = []
-        i = 0
         for filename in os.listdir(directory):
             rate, music = read(f"{directory}/{filename}")
-            files.append([i, rate, music])
-            i += 1
+            filename = filename[:-4]
+            filename = filename.replace('_', ' ')
+            files.append([filename, rate, music])
         return files
 
     def load_data(self):
-        df = pd.DataFrame()
-
         data = self.get_files("../assets/data/sounds_wav/words")
         data += self.get_files("../assets/data/sounds_wav/sentences")
 
