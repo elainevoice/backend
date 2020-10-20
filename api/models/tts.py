@@ -2,7 +2,6 @@ from datetime import datetime
 
 from api.config import lang
 from gtts import gTTS
-import os
 
 class _TextToSpeech:
     def create_wav(self, text, file_name=f'result_{str(datetime.now().strftime("%d-%m-%Y_%H-%M-%S"))}.wav'):
