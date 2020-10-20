@@ -1,12 +1,12 @@
 import numpy as np
 import pandas as pd
 import pydub
+import os
 from keras.layers import Dense, LSTM, LeakyReLU
 from keras.models import Sequential, load_model
 from scipy.io.wavfile import read, write
 from tensorflow import keras
 from datetime import datetime
-
 
 class LSTM1:
     def __init__(self):
@@ -19,8 +19,25 @@ class LSTM1:
     music1_beginlimit = None
     music2_beginlimit = None
     rate = None
+    df = None
 
     def load_data(self):
+        df = pd.DataFrame()
+        filenames = []
+        directory = "../assets/data/sounds_wav/sentences"
+        for filename in os.listdir(directory):
+            filenames.append(filename)
+            self.rate, music1 = read(f"{directory}/{filename}")
+            print(music1)
+            music1 = pd.DataFrame(music1)
+            df = df.append(music1)
+            print(df)
+
+        df['filename'] = filenames
+        self.df = df
+        print(self.df)
+
+        """
         sound = pydub.AudioSegment.from_mp3(r"../assets/data/recordings/eminem.mp3")
         sound.export(r"../assets/data/recordings/eminem.wav", format="wav")
 
@@ -38,6 +55,8 @@ class LSTM1:
 
         self.music1 = music1
         self.music2 = music2
+        """
+
 
         #return music1, music2, music1_limit, music2_limit, music1_beginlimit, music2_beginlimit
 
@@ -53,12 +72,10 @@ class LSTM1:
         for i in range(len(df) - look_back - 1):
             # Array van getallen
             dataX1.append(df.iloc[i: i + look_back, 0].values)
-            print(f"values: {df.iloc[i: i + look_back, 0].values}")
             dataX2.append(df.iloc[i: i + look_back, 1].values)
             if train:
                 # Getal
                 dataY1.append(df.iloc[i + look_back, 0])
-                print(f"not values: {df.iloc[i + look_back, 0]}")
                 dataY2.append(df.iloc[i + look_back, 1])
         if train:
             return np.array(dataX1), np.array(dataX2), np.array(dataY1), np.array(dataY2)
@@ -104,17 +121,15 @@ class LSTM1:
         test1, test2 = self.create_train_dataset(
             pd.concat([input_audioframe.iloc[input_audioframe_startlimit + 1: input_audioframe_maxlimit, :],
                        input_audioframe.iloc[input_audioframe_startlimit + 1: input_audioframe_maxlimit, :]], axis=0),
-            look_back=3, train=True)
+            look_back=3, train=False)
 
         test1 = test1.reshape((-1, 1, 3))
         pred_rnn1 = rnn.predict(test1)
 
-        write('..\generated_audio\pred_rnn3.wav', rate,
-              pd.concat([pd.DataFrame(pred_rnn1.astype('int16'))],
-                        axis=1).values)
+        write(f'./generated_audio/pred_rnn-{self.date}.wav', rate, pd.concat([pd.DataFrame(pred_rnn1.astype('int16'))], axis=1).values)
 
         # saving the original music in wav format
-        write('..\senerated_audio\original3.wav', rate,
+        write(f'./generated_audio/original-rnn-{self.date}.wav', rate,
               pd.concat([input_audioframe.iloc[input_audioframe_startlimit + 1: input_audioframe_maxlimit, :],
                          input_audioframe.iloc[input_audioframe_startlimit + 1: input_audioframe_maxlimit, :]],
                         axis=0).values)
@@ -136,4 +151,4 @@ class LSTM1:
 
 
 lstm = LSTM1()
-lstm.predict()
+lstm.train()
