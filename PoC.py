@@ -26,7 +26,7 @@ class Predict:
             raise Exception(f"there are to many columns. columns: {df.columns.values} ")
         return df
     
-    def _create_test_dataset(self, df, look_back=3, train=False):
+    def _create_test_dataset(self, df, look_back = 3, train=False):
         data = [[] for i in range(len(df.columns.values))]
         for i in range(len(df)-look_back-1):
             for i in range(len(data)):
@@ -59,8 +59,7 @@ class Predict:
         for i in range(len(self.models)):
             predictions.append(self.models[i].predict(tests[i]))
 
-        res = [pd.DataFrame(predictions[i].astype('int16')) for i in range(len(predictions))]
-        write(f'..\scripts\output\{file_name}', r, pd.concat(res, axis=1).values)
+        write(f'..\scripts\output\{file_name}', r, pd.concat([pd.DataFrame(predictions[0].astype('int16')), pd.DataFrame(predictions[1].astype('int16'))], axis=1).values)
 
-# p = Predict([R'..\scripts\models\rnn1.h5', R'..\scripts\models\rnn2.h5'])
-# p.predict(R'..\scripts\assets\data\recordings\YAF_death_ps.wav')
+p = Predict([R'..\scripts\models\rnn1.h5', R'..\scripts\models\rnn2.h5'])
+p.predict(R'..\scripts\assets\data\recordings\YAF_death_ps.wav')
