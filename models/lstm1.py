@@ -10,7 +10,7 @@ from datetime import datetime
 
 class LSTM1:
     def __init__(self):
-        self.date = datetime.now()
+        self.date = str(datetime.now().strftime("%d-%m-%Y_%H-%M-%S"))
 
     music1 = None
     music2 = None
@@ -29,12 +29,12 @@ class LSTM1:
         music1_limit = int(len(music1) / 4)
         self.music1_beginlimit = int(len(music1) / 8)
         # taking only some part of the songs and converting to a dataframe
-        self.music1 = pd.DataFrame(music1[0:music1_limit])
+        music1 = pd.DataFrame(music1[0:music1_limit])
 
         rate, music2 = read(r'../assets/data/recordings/eminem.wav')
         music2_limit = int(len(music2) / 4)
         self.music2_beginlimit = int(len(music2) / 8)
-        self.music2 = pd.DataFrame(music2[0:music2_limit])
+        music2 = pd.DataFrame(music2[0:music2_limit])
 
         self.music1 = music1
         self.music2 = music2
@@ -51,10 +51,14 @@ class LSTM1:
     def create_train_dataset(self, df, look_back, train=True):
         dataX1, dataX2, dataY1, dataY2 = [], [], [], []
         for i in range(len(df) - look_back - 1):
+            # Array van getallen
             dataX1.append(df.iloc[i: i + look_back, 0].values)
+            print(f"values: {df.iloc[i: i + look_back, 0].values}")
             dataX2.append(df.iloc[i: i + look_back, 1].values)
             if train:
+                # Getal
                 dataY1.append(df.iloc[i + look_back, 0])
+                print(f"not values: {df.iloc[i + look_back, 0]}")
                 dataY2.append(df.iloc[i + look_back, 1])
         if train:
             return np.array(dataX1), np.array(dataX2), np.array(dataY1), np.array(dataY2)
@@ -68,13 +72,14 @@ class LSTM1:
 
         X1 = X1.reshape((-1, 1, 3))
         nn_model = self.create_model()
-        nn_model.fit(X1, y1, epochs=20, batch_size=100)
-        nn_model.model.save(f'./generated_models/rnn{self.date}.h5')
+        print(nn_model.summary())
+        nn_model.fit(X1, y1, epochs=1, batch_size=100)
+        nn_model.model.save(f'./generated_models/rnn-{self.date}.h5')
 
     def test(self):
         test1, test2 = self.create_train_dataset(self.concat_df(), look_back=3, train=False)
 
-        rnn1 = keras.models.load_model(f'./generated_models/rnn{self.date}.h5')
+        rnn1 = keras.models.load_model(f'./generated_models/rnn-{self.date}.h5')
         pred_rnn1 = rnn1.predict(test1)
 
         write('pred_rnn.wav', self.rate, pd.concat([pd.DataFrame(pred_rnn1.astype('int16'))], axis=1).values)
@@ -83,7 +88,7 @@ class LSTM1:
         write('original.wav', self.rate, self.concat_df().values)
 
     def predict(self):
-        rnn = keras.models.load_model(f'./generated_models/rnn{self.date}.h5')
+        rnn = keras.models.load_model(f'./generated_models/rnn20-10-2020_11-49-20.h5')
 
         rate, input_audio = read(r'../assets/data/recordings/YAF_death_ps.wav')
 
@@ -99,7 +104,7 @@ class LSTM1:
         test1, test2 = self.create_train_dataset(
             pd.concat([input_audioframe.iloc[input_audioframe_startlimit + 1: input_audioframe_maxlimit, :],
                        input_audioframe.iloc[input_audioframe_startlimit + 1: input_audioframe_maxlimit, :]], axis=0),
-            look_back=3, train=False)
+            look_back=3, train=True)
 
         test1 = test1.reshape((-1, 1, 3))
         pred_rnn1 = rnn.predict(test1)
@@ -128,3 +133,7 @@ class LSTM1:
         nn_model.add(Dense(units=1, activation='relu'))
         nn_model.compile(optimizer='adam', loss='mean_squared_error')
         return nn_model
+
+
+lstm = LSTM1()
+lstm.predict()
