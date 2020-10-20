@@ -28,7 +28,7 @@ class Predict:
         data = [[] for i in range(len(df.columns.values))]
         for i in range(len(df)-look_back-1):
             for j in range(len(data)):
-                data[i].append(df.iloc[i: i + look_back, j].values)
+                data[j].append(df.iloc[i: i + look_back, j].values)
 
         res = []
         for i in data:
@@ -57,8 +57,8 @@ class Predict:
         for i in range(len(self.models)):
             predictions.append(self.models[i].predict(tests[i]))
 
-        write(f'..\scripts\output\{file_name}', r, pd.concat([pd.DataFrame(predictions[0].astype('int16')), pd.DataFrame(predictions[1].astype('int16'))], axis=1).values)
+        write(f'..\scripts\output\{file_name}', r, pd.concat([pd.DataFrame(predictions[i].astype('int16')) for i in range(len(predictions))], axis=1).values)
 
 
-p = Predict([R'..\scripts\models\rnn1.h5', R'..\scripts\models\rnn2.h5'])
+p = Predict([R'..\scripts\models\output\rnn1.h5', R'..\scripts\models\output\rnn2.h5'])
 p.predict(R'..\scripts\assets\data\recordings\YAF_death_ps.wav')
