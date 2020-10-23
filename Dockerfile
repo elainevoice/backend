@@ -10,8 +10,4 @@ RUN pip install -r /tmp/requirements.txt
 
 RUN mkdir -p /app/
 
-WORKDIR /app/
-
-ADD api ./api/
-ADD assets/ ./assets/
-ADD main.py ./main.py
+WORKDIR /app
