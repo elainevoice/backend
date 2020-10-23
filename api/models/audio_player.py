@@ -4,7 +4,7 @@ import os
 import pyglet
 import sounddevice as sd
 import soundfile as sf
-from helpers import find_last_modified_result
+from api.helpers import find_last_modified_result
 
 
 class AudioPlayer:

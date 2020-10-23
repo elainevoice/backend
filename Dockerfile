@@ -1,4 +1,3 @@
-
 FROM tiangolo/uvicorn-gunicorn:python3.8-slim
 
 RUN apt-get update \
@@ -11,3 +10,6 @@ RUN pip install -r /tmp/requirements.txt
 RUN mkdir -p /app/
 
 WORKDIR /app
+
+# Run Unit Tests
+# CMD python3 -m unittest discover tests
