@@ -1,3 +1,5 @@
+from sklearn.utils import shuffle
+from sklearn.model_selection import train_test_split
 import numpy as np
 import pandas as pd
 import pydub
@@ -20,6 +22,7 @@ class LSTM1:
     music2_beginlimit = None
     rate = None
     df = None
+    X_train1= None
 
     def get_files(self, directory):
         files = []
@@ -34,7 +37,10 @@ class LSTM1:
         data = self.get_files("../assets/data/sounds_wav/words")
         data += self.get_files("../assets/data/sounds_wav/sentences")
 
-        self.df = pd.DataFrame(data, columns=['name', 'rate', 'data'])
+        df = pd.DataFrame(data, columns=['name', 'rate', 'data'])
+        df = shuffle(df)
+        df.reset_index(inplace=True, drop=True)
+        self.df = df
         print(self.df)
 
         """
@@ -85,19 +91,43 @@ class LSTM1:
     def train(self):
         self.load_data()
 
-        X1, X2, y1, y2 = self.create_train_dataset(self.concat_df(), look_back=3, train=True)
+        train, test = train_test_split(self.df, test_size=0.2)
 
-        X1 = X1.reshape((-1, 1, 3))
+        X_train = train['data']
+        y_train = train['name']
+        X_test = test['data']
+        y_test = test['name']
+
+        #X1, X2, y1, y2 = self.create_train_dataset(self.concat_df(), look_back=3, train=True)
+
+        i = 0
+        X_train1 = []
+        for row in X_train.iteritems():
+            try:
+                X_train1.append(row[1].reshape(1, int(len(row[1])/3), 3))
+            except Exception as e:
+                print(e)
+                pass
+        print(X_train1)
+        self.X_train = X_train1
+
         nn_model = self.create_model()
         print(nn_model.summary())
-        nn_model.fit(X1, y1, epochs=1, batch_size=100)
+        nn_model.fit(np.array(X_train1), y_train, epochs=1, batch_size=100)
         nn_model.model.save(f'./generated_models/rnn-{self.date}.h5')
 
     def test(self):
-        test1, test2 = self.create_train_dataset(self.concat_df(), look_back=3, train=False)
+        #test1, test2 = self.create_train_dataset(self.concat_df(), look_back=3, train=False)
+
+        train, test = train_test_split(self.df, test_size=0.2)
+
+        X_train = train['data']
+        y_train = train['name']
+        X_test = test['data']
+        y_test = test['name']
 
         rnn1 = keras.models.load_model(f'./generated_models/rnn-{self.date}.h5')
-        pred_rnn1 = rnn1.predict(test1)
+        pred_rnn1 = rnn1.predict(X_test)
 
         write('pred_rnn.wav', self.rate, pd.concat([pd.DataFrame(pred_rnn1.astype('int16'))], axis=1).values)
 
