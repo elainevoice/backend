@@ -13,6 +13,10 @@ then activate venv
 then install req's
 `python -m pip install -r requirements.txt`
 
+installing torch should be done by hand
+https://pytorch.org/get-started/locally/ 
+
+
 then start api
 `uvicorn main:app`
 
