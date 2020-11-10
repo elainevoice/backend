@@ -2,7 +2,7 @@
 FROM tiangolo/uvicorn-gunicorn:python3.8-slim
 
 RUN apt-get update \
-    && apt-get install -y libportaudio2 libsndfile-dev 
+    && apt-get install -y libportaudio2 libsndfile-dev espeak
 
 ADD requirements.txt /tmp/
 
