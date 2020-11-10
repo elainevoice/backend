@@ -19,9 +19,6 @@ class GenForward():
         self.amp = 1
         self.max_iter = 32
         self.input_text = input_text
-        print('================')
-        print(os.getcwdb())
-        print('================')
         hp.configure(self.hparams)
         self.paths = Paths(hp.data_path, hp.voc_model_id, hp.tts_model_id)
     
