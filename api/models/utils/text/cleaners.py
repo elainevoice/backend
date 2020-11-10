@@ -1,5 +1,5 @@
 from phonemizer.phonemize import phonemize
-from utils import hparams as hp
+from api.models.utils import hparams as hp
 
 
 """ from https://github.com/keithito/tacotron """

@@ -7,7 +7,7 @@ import librosa
 import webrtcvad
 from scipy.ndimage import binary_dilation
 
-from utils import hparams as hp
+from api.models.utils import hparams as hp
 from scipy.signal import lfilter
 
 

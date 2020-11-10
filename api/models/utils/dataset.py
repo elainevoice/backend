@@ -2,10 +2,10 @@ from torch.utils.data.sampler import Sampler
 from torch.utils.data import Dataset, DataLoader
 from typing import List, Dict
 
-from utils.dsp import *
-from utils import hparams as hp
-from utils.files import unpickle_binary
-from utils.text import text_to_sequence
+from api.models.utils.dsp import *
+from api.models.utils import hparams as hp
+from api.models.utils.files import unpickle_binary
+from api.models.utils.text import text_to_sequence
 from pathlib import Path
 import random
 

@@ -1,11 +1,12 @@
 from fastapi import APIRouter, File, HTTPException, UploadFile
 from fastapi.responses import (FileResponse, HTMLResponse, JSONResponse,
                                PlainTextResponse)
-
 from main import app
+from starlette.requests import Request
+
 from api import controller
 from api.config import application_name
-from starlette.requests import Request
+
 router = APIRouter()
 
 @router.get("/", response_class=HTMLResponse)
@@ -62,3 +63,12 @@ def crack_create_audio_from_text(text: str, request: Request):
 @router.get('/crack_audio_oplossing')
 def crack_audio_oplossing(audio_name: str):
     return FileResponse(audio_name)
+
+
+@router.post('/taco')
+def text_to_tacotron_audio_file(text: str):
+    try:
+        wav_audio_file_path = controller.text_to_tacotron_audio_file(text)
+        return FileResponse(str(wav_audio_file_path))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))

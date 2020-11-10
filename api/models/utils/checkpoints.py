@@ -1,5 +1,5 @@
 import torch
-from utils.paths import Paths
+from api.models.utils.paths import Paths
 
 
 def get_checkpoint_paths(checkpoint_type: str, paths: Paths):

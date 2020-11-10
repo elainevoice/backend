@@ -1,4 +1,5 @@
 from api.models.stt import sttAdapter
+from api.models.taco_adapter import TacoTronAdapter
 from api.models.tts import ttsAdapter
 
 
@@ -17,3 +18,10 @@ def tts_create_audio_from_text(text):
     tts_adapter = ttsAdapter()
     audio_path = tts_adapter.create_wav(text)
     return audio_path
+
+
+def text_to_tacotron_audio_file(text):
+    tta = TacoTronAdapter()
+    absolute_file_path = tta.generate_wav(text)
+    return absolute_file_path
+    

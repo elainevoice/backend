@@ -7,7 +7,7 @@ import torch.nn as nn
 import torch
 import torch.nn.functional as F
 
-from models.tacotron import CBHG
+from api.models.taco_models.tacotron import CBHG
 
 
 class LengthRegulator(nn.Module):

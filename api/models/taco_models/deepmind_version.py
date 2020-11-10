@@ -1,8 +1,8 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from utils.display import *
-from utils.dsp import *
+from api.models.utils.display import *
+from api.models.utils.dsp import *
 import numpy as np
 
 class WaveRNN(nn.Module):

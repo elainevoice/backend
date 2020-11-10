@@ -1,9 +1,9 @@
 """ from https://github.com/keithito/tacotron """
 import re
-from utils import hparams as hp
-from utils.text import cleaners
-from utils.text.cleaners import to_phonemes
-from utils.text.symbols import phonemes
+from api.models.utils import hparams as hp
+from api.models.utils.text import cleaners
+from api.models.utils.text.cleaners import to_phonemes
+from api.models.utils.text.symbols import phonemes
 
 # Mappings from symbol to numeric ID and vice versa:
 _symbol_to_id = {s: i for i, s in enumerate(phonemes)}
