@@ -55,7 +55,9 @@ def sequence_to_text(sequence):
 
 
 def clean_text(text):
-    cleaner = getattr(cleaners, hp.tts_cleaner_name)
+    tts_cleaner_name = 'basic_cleaners'
+
+    cleaner = getattr(cleaners, tts_cleaner_name)
     text = cleaner(text)
     return text
 

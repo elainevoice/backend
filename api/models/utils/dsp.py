@@ -26,7 +26,7 @@ def load_wav(path):
 
 
 def save_wav(x, path):
-    librosa.output.write_wav(path, x.astype(np.float32), sr=hp.sample_rate)
+    librosa.output.write_wav(path, x.astype(np.float32), sr=22050)
 
 
 def split_signal(x):
@@ -140,10 +140,10 @@ def reconstruct_waveform(mel, n_iter=32):
     mel spectrogram back into a waveform."""
     denormalized = denormalize(mel)
     S = librosa.feature.inverse.mel_to_stft(
-        denormalized, power=1, sr=hp.sample_rate,
-        n_fft=hp.n_fft, fmin=hp.fmin, fmax=hp.fmax)
+        denormalized, power=1, sr=22050,
+        n_fft=1024, fmin=0, fmax=8000)
     wav = librosa.core.griffinlim(
         S, n_iter=n_iter,
-        hop_length=hp.hop_length, win_length=hp.win_length)
+        hop_length=256, win_length=1024)
     return wav
 

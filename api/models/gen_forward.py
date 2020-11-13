@@ -3,25 +3,25 @@ import os
 import torch
 from api.models.taco_models.fatchord_version import WaveRNN
 from api.models.taco_models.forward_tacotron import ForwardTacotron
-from api.models.utils import hparams as hp
 from api.models.utils.display import simple_table
 from api.models.utils.dsp import reconstruct_waveform, save_wav
 from api.models.utils.paths import Paths
-from api.models.utils.text import clean_text, text_to_sequence
+from api.models.utils.text import clean_text, text_to_sequence, cleaners
 from api.models.utils.text.symbols import phonemes
 
 
 class GenForward():
     def __init__(self, input_text):
-        self.hparams =  './api/models/hparams.py'
         self.vocoder = 'griffinlim'
         self.alpha = 1
         self.amp = 1
         self.max_iter = 32
         self.input_text = input_text
-        hp.configure(self.hparams)
-        self.paths = Paths(hp.data_path, hp.voc_model_id, hp.tts_model_id)
-    
+        data_path = 'data/'
+        voc_model_id = 'ljspeech_raw'
+        tts_model_id = 'ljspeech_tts'
+        self.paths = Paths(data_path, voc_model_id, tts_model_id)
+
     def generate_wav(self):     
         if torch.cuda.is_available():
             device = torch.device('cuda')
@@ -30,24 +30,25 @@ class GenForward():
         print('Using device:', device)
 
         print('\nInitialising Forward TTS Model...\n')
-        tts_model = ForwardTacotron(embed_dims=hp.forward_embed_dims,
+
+        tts_model = ForwardTacotron(embed_dims=256,
                                     num_chars=len(phonemes),
-                                    durpred_rnn_dims=hp.forward_durpred_rnn_dims,
-                                    durpred_conv_dims=hp.forward_durpred_conv_dims,
-                                    durpred_dropout=hp.forward_durpred_dropout,
-                                    pitch_rnn_dims=hp.forward_pitch_rnn_dims,
-                                    pitch_conv_dims=hp.forward_pitch_conv_dims,
-                                    pitch_dropout=hp.forward_pitch_dropout,
-                                    pitch_emb_dims=hp.forward_pitch_emb_dims,
-                                    pitch_proj_dropout=hp.forward_pitch_proj_dropout,
-                                    rnn_dim=hp.forward_rnn_dims,
-                                    postnet_k=hp.forward_postnet_K,
-                                    postnet_dims=hp.forward_postnet_dims,
-                                    prenet_k=hp.forward_prenet_K,
-                                    prenet_dims=hp.forward_prenet_dims,
-                                    highways=hp.forward_num_highways,
-                                    dropout=hp.forward_dropout,
-                                    n_mels=hp.num_mels).to(device)
+                                    durpred_rnn_dims=64,
+                                    durpred_conv_dims=256,
+                                    durpred_dropout=0.5,
+                                    pitch_rnn_dims=128,
+                                    pitch_conv_dims=256,
+                                    pitch_dropout=0.5,
+                                    pitch_emb_dims=64,
+                                    pitch_proj_dropout=0.0,
+                                    rnn_dim=512,
+                                    postnet_k=8,
+                                    postnet_dims=256,
+                                    prenet_k=16,
+                                    prenet_dims=256,
+                                    highways=4,
+                                    dropout=0.1,
+                                    n_mels=80).to(device)
         tts_weights = None
         tts_load_path = tts_weights if tts_weights else self.paths.forward_latest_weights
         tts_model.load(tts_load_path)
@@ -70,7 +71,6 @@ class GenForward():
             _, m, dur, pitch = tts_model.generate(x, alpha=self.alpha, pitch_function=pitch_function)
 
             v_type = self.vocoder
-        
 
             if self.input_text:
                 save_path = self.paths.forward_output/f'{self.input_text[:10]}_{self.alpha}_{v_type}_{tts_k}k_amp{self.amp}.wav'
