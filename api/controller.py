@@ -24,4 +24,3 @@ def text_to_tacotron_audio_file(text):
     tta = TacoTronAdapter()
     absolute_file_path = tta.generate_wav(text)
     return absolute_file_path
-    

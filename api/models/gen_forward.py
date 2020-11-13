@@ -1,16 +1,13 @@
-import os
-
 import torch
-from api.models.taco_models.fatchord_version import WaveRNN
 from api.models.taco_models.forward_tacotron import ForwardTacotron
 from api.models.utils.display import simple_table
 from api.models.utils.dsp import reconstruct_waveform, save_wav
 from api.models.utils.paths import Paths
-from api.models.utils.text import clean_text, text_to_sequence, cleaners
+from api.models.utils.text import clean_text, text_to_sequence
 from api.models.utils.text.symbols import phonemes
 
 
-class GenForward():
+class GenForward:
     def __init__(self, input_text):
         self.vocoder = 'griffinlim'
         self.alpha = 1

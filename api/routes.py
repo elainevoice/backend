@@ -1,13 +1,13 @@
 from fastapi import APIRouter, File, HTTPException, UploadFile
 from fastapi.responses import (FileResponse, HTMLResponse, JSONResponse,
                                PlainTextResponse)
-from main import app
 from starlette.requests import Request
 
 from api import controller
 from api.config import application_name
 
 router = APIRouter()
+
 
 @router.get("/", response_class=HTMLResponse)
 def home():
@@ -28,6 +28,7 @@ def post_recording_disk(file: UploadFile = File(...)):
     except Exception as e:
         raise HTTPException(status_code=500,
                             detail="Something went wrong")
+
 
 # Niet helemaal in memory want als UploadFile te groot is wordt het op schijf opgeslagen, zie https://fastapi.tiangolo.com/tutorial/request-files/
 @router.post('/recognize_audio_memory')
@@ -51,6 +52,7 @@ def create_audio_from_text(text: str):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+
 @router.post('/crack_create_audio')
 def crack_create_audio_from_text(text: str, request: Request):
     try:
@@ -59,6 +61,7 @@ def crack_create_audio_from_text(text: str, request: Request):
     # To do  test what exceptions to actually catch
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
 
 @router.get('/crack_audio_oplossing')
 def crack_audio_oplossing(audio_name: str):
