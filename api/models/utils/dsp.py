@@ -26,6 +26,7 @@ def load_wav(path):
 
 
 def save_wav(x, path):
+    # sr stands for sample rate
     librosa.output.write_wav(path, x.astype(np.float32), sr=22050)
 
 

@@ -17,18 +17,18 @@ class GenForward():
         self.amp = 1
         self.max_iter = 32
         self.input_text = input_text
-        data_path = 'data/'
-        voc_model_id = 'ljspeech_raw'
-        tts_model_id = 'ljspeech_tts'
-        self.paths = Paths(data_path, voc_model_id, tts_model_id)
+        self.data_path = 'data/'
+        self.voc_model_id = 'ljspeech_raw'
+        self.tts_model_id = 'ljspeech_tts'
+        self.paths = Paths(self.data_path, self.voc_model_id, self.tts_model_id)
 
-    def generate_wav(self):     
+    def generate_wav(self):
         if torch.cuda.is_available():
             device = torch.device('cuda')
         else:
             device = torch.device('cpu')
-        print('Using device:', device)
 
+        print('Using device:', device)
         print('\nInitialising Forward TTS Model...\n')
 
         tts_model = ForwardTacotron(embed_dims=256,
@@ -55,14 +55,14 @@ class GenForward():
 
         text = clean_text(self.input_text.strip())
         inputs = [text_to_sequence(text)]
-        
+
         tts_k = tts_model.get_step() // 1000
 
         simple_table([('Forward Tacotron', str(tts_k) + 'k'),
-                        ('Vocoder Type', 'Griffin-Lim'),
-                        ('GL Iters', self.max_iter)])
+                      ('Vocoder Type', 'Griffin-Lim'),
+                      ('GL Iters', self.max_iter)])
 
-        # simpla amplification of pitch
+        # simple amplification of pitch
         pitch_function = lambda x: x * self.amp
 
         for i, x in enumerate(inputs, self.alpha):
@@ -73,9 +73,9 @@ class GenForward():
             v_type = self.vocoder
 
             if self.input_text:
-                save_path = self.paths.forward_output/f'{self.input_text[:10]}_{self.alpha}_{v_type}_{tts_k}k_amp{self.amp}.wav'
+                save_path = self.paths.forward_output / f'{self.input_text[:10]}_{self.alpha}_{v_type}_{tts_k}k_amp{self.amp}.wav'
             else:
-                save_path = self.paths.forward_output/f'{i}_{v_type}_{tts_k}k_alpha{self.alpha}_amp{self.amp}.wav'
+                save_path = self.paths.forward_output / f'{i}_{v_type}_{tts_k}k_alpha{self.alpha}_amp{self.amp}.wav'
 
             wav = reconstruct_waveform(m, n_iter=self.max_iter)
             save_wav(wav, save_path)
