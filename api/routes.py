@@ -5,7 +5,7 @@ from starlette.requests import Request
 
 from api import controller
 from api.config import application_name
-from pydantic import BaseModel
+from api.models.text_data import TextData
 
 router = APIRouter()
 
@@ -67,11 +67,6 @@ def crack_create_audio_from_text(text: str, request: Request):
 @router.get('/crack_audio_oplossing')
 def crack_audio_oplossing(audio_name: str):
     return FileResponse(audio_name)
-
-
-# Will move this soonTM, need some sleep first
-class TextData(BaseModel):
-    text: str
 
 
 @router.post('/taco')
