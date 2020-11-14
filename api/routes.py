@@ -5,6 +5,7 @@ from starlette.requests import Request
 
 from api import controller
 from api.config import application_name
+from pydantic import BaseModel
 
 router = APIRouter()
 
@@ -68,10 +69,15 @@ def crack_audio_oplossing(audio_name: str):
     return FileResponse(audio_name)
 
 
+# Will move this soonTM, need some sleep first
+class TextData(BaseModel):
+    text: str
+
+
 @router.post('/taco')
-def text_to_tacotron_audio_file(text: str):
+def text_to_tacotron_audio_file(data: TextData):
     try:
-        wav_audio_file_path = controller.text_to_tacotron_audio_file(text)
+        wav_audio_file_path = controller.text_to_tacotron_audio_file(data.text)
         return FileResponse(str(wav_audio_file_path))
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
