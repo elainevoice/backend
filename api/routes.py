@@ -11,7 +11,6 @@ router = APIRouter()
 def home():
     return f"<body><h1>API of {application_name}</h1></body>"
 
-
 @router.post('/recognize_audio_disk')
 def post_recording_disk(file: UploadFile = File(...)):
     try:
