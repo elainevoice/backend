@@ -14,3 +14,5 @@ WORKDIR /app/
 ADD api ./api/
 ADD assets/ ./assets/
 ADD main.py ./main.py
+
+CMD "/start-reload.sh"
