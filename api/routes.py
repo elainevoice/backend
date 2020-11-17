@@ -11,6 +11,9 @@ from api import controller
 from api.config import application_name
 from api.models.text_data import TextData
 
+import uuid
+import ffmpeg
+
 router = APIRouter()
 
 
@@ -84,10 +87,19 @@ def text_to_tacotron_audio_file(data: TextData):
 @router.post('/taco_audio')
 async def audio_to_tacotron_audio_file(file: UploadFile = File(...)):
     try:
-        print(file.file)
-        spooled_temp_file = file.file
-        print(spooled_temp_file)
-        text = await controller.stt_recognize_binary_audio_in_memory(spooled_temp_file)
+        bytes = await file.read()
+        unique_filename = str(uuid.uuid4())
+        path = 'temp/' + unique_filename + '.webm'
+        new_path = 'temp/' + unique_filename + '.wav'
+        with open(path, mode='bx') as f:
+            f.write(bytes)
+            f.close()
+        
+        stream = ffmpeg.input(path)
+        output = stream.output(new_path, format='wav')
+        output.run()
+
+        text = await controller.stt_recognize_binary_audio_in_memory(new_path)
         print('kkkkk')
         wav_audio_file_path = controller.text_to_tacotron_audio_file(text)
         return FileResponse(str(wav_audio_file_path))

@@ -36,14 +36,12 @@ class sttAdapter:
     def __init__(self):
         self.stt = _SpeechToText()
 
-    async def recognize_audio_memory(self, spooled_temp_file):
+    async def recognize_audio_memory(self, path):
         try:
-            text = await self.stt.recognize_wav(spooled_temp_file)
+            text = await self.stt.recognize_wav(path)
             print(f'aaa{text}')
         except Exception as e:
             raise Exception(e)
-        finally:
-            spooled_temp_file.close()
         return text
 
     # Linelenght 135 yikes
