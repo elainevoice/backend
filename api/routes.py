@@ -11,6 +11,7 @@ from api import controller
 from api.config import application_name
 from api.models.text_data import TextData
 
+import os
 import uuid
 import ffmpeg
 
@@ -102,6 +103,10 @@ async def audio_to_tacotron_audio_file(file: UploadFile = File(...)):
         text = await controller.stt_recognize_binary_audio_in_memory(new_path)
         print('kkkkk')
         wav_audio_file_path = controller.text_to_tacotron_audio_file(text)
+
+        os.remove(path)
+        os.remove(new_path)
+        
         return FileResponse(str(wav_audio_file_path))
     except Exception as e:
         print(e)
