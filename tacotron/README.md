@@ -41,12 +41,6 @@ After that use the following command to enter the container
 docker exec -it <CONTAINER_NAME> /bin/sh
 ```
 
-##### Installing a new package
-Enter the docker container.
-```console
-npm install <package>
-```
-
 ### Preparing a Dataset
 Each dataset requires a .csv file separated by pipes '|'.
 The CSV file of metadata requires the following parameters:
