@@ -29,7 +29,7 @@ class GenForward:
 
         print('Using device:', device)
         print('\nInitialising Forward TTS Model...\n')
-        dir_path = os.path.dirname(os.path.realpath(__file__)
+        dir_path = os.path.dirname(os.path.realpath(__file__))
         with open(rf'{dir_path}/taco_config.yaml') as f:
             loaded_yaml = yaml.safe_load(f)
             config = Munch(loaded_yaml)
