@@ -5,8 +5,10 @@ from api.models.utils.dsp import reconstruct_waveform, save_wav
 from api.models.utils.paths import Paths
 from api.models.utils.text import clean_text, text_to_sequence
 from api.models.utils.text.symbols import phonemes
-
-
+import yaml
+from munch import Munch
+import os 
+dir_path = os.path.dirname(os.path.realpath(__file__)
 class GenForward:
     def __init__(self, input_text):
         self.vocoder = 'griffinlim'
@@ -28,24 +30,28 @@ class GenForward:
         print('Using device:', device)
         print('\nInitialising Forward TTS Model...\n')
 
-        tts_model = ForwardTacotron(embed_dims=256,
+        with open(rf'{dir_path}/taco_config.yaml') as f:
+            loaded_yaml = yaml.safe_load(f)
+            config = Munch(loaded_yaml)
+
+        tts_model = ForwardTacotron(embed_dims=config.embed_dims,
                                     num_chars=len(phonemes),
-                                    durpred_rnn_dims=64,
-                                    durpred_conv_dims=256,
-                                    durpred_dropout=0.5,
-                                    pitch_rnn_dims=128,
-                                    pitch_conv_dims=256,
-                                    pitch_dropout=0.5,
-                                    pitch_emb_dims=64,
-                                    pitch_proj_dropout=0.0,
-                                    rnn_dim=512,
-                                    postnet_k=8,
-                                    postnet_dims=256,
-                                    prenet_k=16,
-                                    prenet_dims=256,
-                                    highways=4,
-                                    dropout=0.1,
-                                    n_mels=80).to(device)
+                                    durpred_rnn_dims=config.durpred_rnn_dims,
+                                    durpred_conv_dims=config.durpred_conv_dims,
+                                    durpred_dropout=config.durpred_dropout,
+                                    pitch_rnn_dims=config.pitch_rnn_dims,
+                                    pitch_conv_dims=config.pitch_conv_dims,
+                                    pitch_dropout=config.pitch_dropout,
+                                    pitch_emb_dims=config.pitch_emb_dims,
+                                    pitch_proj_dropout=config.pitch_proj_dropout,
+                                    rnn_dim=config.rnn_dim,
+                                    postnet_k=config.postnet_k,
+                                    postnet_dims=config.postnet_dims,
+                                    prenet_k=config.prenet_k,
+                                    prenet_dims=config.prenet_dims,
+                                    highways=config.highways,
+                                    dropout=config.dropout,
+                                    n_mels=config.n_mels).to(device)
         tts_weights = None
         tts_load_path = tts_weights if tts_weights else self.paths.forward_latest_weights
         tts_model.load(tts_load_path)
