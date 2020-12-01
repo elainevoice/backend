@@ -38,24 +38,24 @@ class GenForward:
             loaded_yaml = yaml.safe_load(f)
             config = Munch(loaded_yaml)
 
-        tts_model = ForwardTacotron(embed_dims=config.embed_dims,
+        tts_model = ForwardTacotron(embed_dims=256,
                                     num_chars=len(phonemes),
-                                    durpred_rnn_dims=config.durpred_rnn_dims,
-                                    durpred_conv_dims=config.durpred_conv_dims,
+                                    durpred_rnn_dims=64,
+                                    durpred_conv_dims=256,
                                     durpred_dropout=config.durpred_dropout,
-                                    pitch_rnn_dims=config.pitch_rnn_dims,
-                                    pitch_conv_dims=config.pitch_conv_dims,
+                                    pitch_rnn_dims=128,
+                                    pitch_conv_dims=256,
                                     pitch_dropout=config.pitch_dropout,
-                                    pitch_emb_dims=config.pitch_emb_dims,
+                                    pitch_emb_dims=64,
                                     pitch_proj_dropout=config.pitch_proj_dropout,
-                                    rnn_dim=config.rnn_dim,
-                                    postnet_k=config.postnet_k,
-                                    postnet_dims=config.postnet_dims,
-                                    prenet_k=config.prenet_k,
-                                    prenet_dims=config.prenet_dims,
+                                    rnn_dim=512,
+                                    postnet_k=8,
+                                    postnet_dims=256,
+                                    prenet_k=16,
+                                    prenet_dims=256,
                                     highways=config.highways,
                                     dropout=config.dropout,
-                                    n_mels=config.n_mels).to(device)
+                                    n_mels=80).to(device)
         tts_weights = None
         tts_load_path = tts_weights if tts_weights else self.paths.forward_latest_weights
         tts_model.load(tts_load_path)

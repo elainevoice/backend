@@ -1,17 +1,5 @@
-embed_dims: 256
-durpred_rnn_dims: 64
-durpred_conv_dims: 256
 durpred_dropout: 0.5
-pitch_rnn_dims: 128
-pitch_conv_dims: 256
 pitch_dropout: 0.5
-pitch_emb_dims: 64
 pitch_proj_dropout: 0.0
-rnn_dim: 512
-postnet_k: 8
-postnet_dims: 256
-prenet_k: 16
-prenet_dims: 256
 highways: 4
 dropout: 0.1
-n_mels: 80
