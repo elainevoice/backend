@@ -8,7 +8,7 @@ from api.models.utils.text.symbols import phonemes
 import yaml
 from munch import Munch
 import os 
-dir_path = os.path.dirname(os.path.realpath(__file__)
+
 class GenForward:
     def __init__(self, input_text):
         self.vocoder = 'griffinlim'
@@ -29,7 +29,7 @@ class GenForward:
 
         print('Using device:', device)
         print('\nInitialising Forward TTS Model...\n')
-
+        dir_path = os.path.dirname(os.path.realpath(__file__)
         with open(rf'{dir_path}/taco_config.yaml') as f:
             loaded_yaml = yaml.safe_load(f)
             config = Munch(loaded_yaml)
