@@ -1,0 +1,5 @@
+durpred_dropout: 0.5
+pitch_dropout: 0.5
+pitch_proj_dropout: 0.0
+highways: 4
+dropout: 0.1

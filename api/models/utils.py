@@ -6,16 +6,15 @@ import pandas as pd
 
 class Utils:
     @staticmethod
-    def mp3_to_wav():
-        for path in pathlib.Path("../assets/data/sounds_mp3/sentences").iterdir():
-            sound = AudioSegment.from_mp3(path)
-            dest = f"../assets/data/sounds_wav/sentences/{path.stem}.wav"
-            sound.export(dest, format="wav")
-
-        for path in pathlib.Path("../assets/data/sounds_mp3/words").iterdir():
-            sound = AudioSegment.from_mp3(path)
-            dest = f"../assets/data/sounds_wav/words/{path.stem}.wav"
-            sound.export(dest, format="wav")
+    def mp3_to_wav(path):
+        try:
+            for path in pathlib.Path(path).iterdir():
+                sound = AudioSegment.from_mp3(path)
+                dest = f"{path.parent}/{path.stem}.wav"
+                print(dest)
+                sound.export(dest, format="wav")
+        except Exception as e:
+            print(e)
 
     @staticmethod
     def rename_wav():
@@ -34,3 +33,7 @@ class Utils:
             except:
                 pass
 
+
+def format_wavs():
+    Utils.mp3_to_wav("../../assets/data/sounds_mp3/sentences")
+    Utils.mp3_to_wav("../../assets/data/sounds_mp3/words")
