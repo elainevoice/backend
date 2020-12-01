@@ -5,6 +5,7 @@ from api.models.utils.display import *
 from api.models.utils.dsp import *
 import numpy as np
 
+
 class WaveRNN(nn.Module):
     def __init__(self, hidden_size=896, quantisation=256):
         super(WaveRNN, self).__init__()
@@ -33,7 +34,6 @@ class WaveRNN(nn.Module):
         # display num params
         self.num_params()
 
-        
     def forward(self, prev_y, prev_hidden, current_coarse):
         
         # Main matmul - the projection is split 3 ways
@@ -70,8 +70,7 @@ class WaveRNN(nn.Module):
         out_fine = self.O4(F.relu(self.O3(hidden_fine)))
 
         return out_coarse, out_fine, hidden
-    
-        
+
     def generate(self, seq_len):
         device = next(self.parameters()).device  # use same device as parameters
 

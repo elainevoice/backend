@@ -1,15 +1,11 @@
-import io
-import shutil
 from datetime import datetime
-
-import sounddevice as sd
-import soundfile as sf
 import speech_recognition as sr
 from api.config import lang
 
 
 class _SpeechToText:
-    def _recognize_audio(self, recognizer, audio):
+    @staticmethod
+    def _recognize_audio(recognizer, audio):
         try:
             return recognizer.recognize_google(audio, None, lang)
         except sr.UnknownValueError:
@@ -32,7 +28,7 @@ class _SpeechToText:
         return self._recognize_audio(recognizer, audio)
 
 
-class sttAdapter:
+class SttAdapter:
     def __init__(self):
         self.stt = _SpeechToText()
 
@@ -44,8 +40,8 @@ class sttAdapter:
             raise Exception(e)
         return text
 
-    # Linelenght 135 yikes
-    async def recognize_audio_disk(self, spooled_temp_file, file_name=f'recording_{str(datetime.now().strftime("%d-%m-%Y_%H-%M-%S"))}.wav'):
+    async def recognize_audio_disk(self, spooled_temp_file,
+                                   file_name=f'recording_{str(datetime.now().strftime("%d-%m-%Y_%H-%M-%S"))}.wav'):
         try:
             destination = f"./assets/data/results/{file_name}"
             with open(destination, 'wb+') as file:

@@ -34,7 +34,6 @@ class Utils:
                 pass
 
 
-
 def format_wavs():
     Utils.mp3_to_wav("../../assets/data/sounds_mp3/sentences")
     Utils.mp3_to_wav("../../assets/data/sounds_mp3/words")

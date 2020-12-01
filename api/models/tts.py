@@ -2,18 +2,19 @@ from datetime import datetime
 
 from api.config import lang
 from gtts import gTTS
-import os
+
 
 class _TextToSpeech:
-    def create_wav(self, text, file_name=f'result_{str(datetime.now().strftime("%d-%m-%Y_%H-%M-%S"))}.wav'):
-        
+    @staticmethod
+    def create_wav(text, file_name=f'result_{str(datetime.now().strftime("%d-%m-%Y_%H-%M-%S"))}.wav'):
+
         save_path = f"./assets/data/results/{file_name}"
-        speechResult = gTTS(text=text, lang=lang, slow=False)
-        speechResult.save(save_path)
+        speech_result = gTTS(text=text, lang=lang, slow=False)
+        speech_result.save(save_path)
         return save_path
 
 
-class ttsAdapter:
+class TtsAdapter:
     def __init__(self):
         self.tts = _TextToSpeech()
 
