@@ -16,8 +16,10 @@ def get_taco_models():
     # got bs with relative path
     dir_path = os.path.dirname(os.path.realpath(__file__)).replace('\\', '/')
 
+    print([i for i in glob.iglob(f"{dir_path}/models/checkpoints/*/")])
+
     #get model folder names
-    model_folders = [i.split('\\')[1].split('_')[0] for i in glob.iglob(f"{dir_path}/models/checkpoints/*/")]
+    model_folders = [i.split('checkpoints/')[1].split('_')[0] for i in glob.iglob(f"{dir_path}/models/checkpoints/*/")]
 
     # remove duplicates
     return list(dict.fromkeys(model_folders))

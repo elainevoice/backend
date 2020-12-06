@@ -28,5 +28,6 @@ def text_to_tacotron_audio_file(text, model):
     return absolute_file_path
 
 def get_models():
+    print(get_taco_models())
     return get_taco_models()
 
