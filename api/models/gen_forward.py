@@ -11,15 +11,15 @@ import os
 
 
 class GenForward:
-    def __init__(self, input_text):
+    def __init__(self, input_text, model):
         self.vocoder = 'griffinlim'
         self.alpha = 1
         self.amp = 1
         self.max_iter = 32
         self.input_text = input_text
         self.data_path = 'data/'
-        self.voc_model_id = 'ljspeech_raw'
-        self.tts_model_id = 'ljspeech_tts'
+        self.voc_model_id = f'{model}_raw' # ljspeech_tts
+        self.tts_model_id = f'{model}_tts' # ljspeech_tts
         self.paths = Paths(self.data_path, self.voc_model_id, self.tts_model_id)
 
     def generate_wav(self):

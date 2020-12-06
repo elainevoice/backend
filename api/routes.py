@@ -77,16 +77,16 @@ def crack_audio_oplossing(audio_name: str):
 
 
 @router.post('/taco')
-def text_to_tacotron_audio_file(data: TextData):
+def text_to_tacotron_audio_file(data: TextData, model: str):
     try:
-        wav_audio_file_path = controller.text_to_tacotron_audio_file(data.text)
+        wav_audio_file_path = controller.text_to_tacotron_audio_file(data.text, model)
         return FileResponse(str(wav_audio_file_path))
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
 
 @router.post('/taco_audio')
-async def audio_to_tacotron_audio_file(file: UploadFile = File(...)):
+async def audio_to_tacotron_audio_file(file: UploadFile = File(...), model: str = 'None'):
     try:
         bytes = await file.read()
         unique_filename = str(uuid.uuid4())
@@ -102,7 +102,7 @@ async def audio_to_tacotron_audio_file(file: UploadFile = File(...)):
 
         text = await controller.stt_recognize_binary_audio_in_memory(new_path)
         print('kkkkk')
-        wav_audio_file_path = controller.text_to_tacotron_audio_file(text)
+        wav_audio_file_path = controller.text_to_tacotron_audio_file(text, model)
 
         os.remove(path)
         os.remove(new_path)
