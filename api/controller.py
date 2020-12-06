@@ -1,6 +1,7 @@
 from api.models.stt import SttAdapter
 from api.models.taco_adapter import TacoTronAdapter
 from api.models.tts import TtsAdapter
+from api.helpers import get_taco_models
 
 
 async def stt_recognize_binary_audio_on_disk(spooled_temp_file):
@@ -25,3 +26,7 @@ def text_to_tacotron_audio_file(text, model):
     absolute_file_path = tta.generate_wav(text)
     print(absolute_file_path)
     return absolute_file_path
+
+def get_models():
+    return get_taco_models()
+

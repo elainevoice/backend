@@ -18,7 +18,7 @@ class GenForward:
         self.max_iter = 32
         self.input_text = input_text
         self.data_path = 'data/'
-        self.voc_model_id = f'{model}_raw' # ljspeech_tts
+        self.voc_model_id = f'{model}_raw' # ljspeech_tts so model atm 'ljspeech'
         self.tts_model_id = f'{model}_tts' # ljspeech_tts
         self.paths = Paths(self.data_path, self.voc_model_id, self.tts_model_id)
 
