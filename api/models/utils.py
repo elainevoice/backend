@@ -11,7 +11,6 @@ class Utils:
             for path in pathlib.Path(path).iterdir():
                 sound = AudioSegment.from_mp3(path)
                 dest = f"{path.parent}/{path.stem}.wav"
-                print(dest)
                 sound.export(dest, format="wav")
         except Exception as e:
             print(e)
