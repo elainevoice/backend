@@ -78,9 +78,9 @@ def crack_audio_oplossing(audio_name: str):
 
 
 @router.post('/taco')
-def text_to_tacotron_audio_file(data: TTS_model):
+def text_to_tacotron_audio_file(data: TTS_model, model = Header(None)):
     try:
-        wav_audio_file_path = controller.text_to_tacotron_audio_file(data.text, data.model)
+        wav_audio_file_path = controller.text_to_tacotron_audio_file(data.text, model)
         return FileResponse(str(wav_audio_file_path))
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
