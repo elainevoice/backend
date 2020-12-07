@@ -1,20 +1,34 @@
+FROM python:3.8-slim as base
 
-FROM tiangolo/uvicorn-gunicorn:python3.8-slim
+FROM base as builder
+RUN mkdir /install
+WORKDIR /install
+
+COPY requirements.txt /tmp/requirements.txt
 
 RUN apt-get update \
-    && apt-get install -y libportaudio2 libsndfile-dev espeak build-essential libzbar-dev 
+    && apt-get -y --no-install-recommends install build-essential \
+    && pip install --no-cache --prefix=/install --no-warn-script-location -r /tmp/requirements.txt
 
-RUN apt-get install -y ffmpeg
+FROM base
 
-ADD requirements.txt /tmp/
+COPY --from=builder /install /usr/local
 
-RUN pip install -r /tmp/requirements.txt
 
-# RUN apt-get install -y python-pip python-dev build-essential
-# RUN pip install torch==1.2.0+cpu torchvision==0.7.0+cpu -f https://download.pytorch.org/whl/torch_stable.html
+COPY ./docker_scripts/gunicorn_conf.py /gunicorn_conf.py
+
+COPY ./docker_scripts/start-reload.sh /start-reload.sh
+
+RUN chmod +x /start-reload.sh
+
+
+RUN apt-get update \
+    && apt-get install -y libportaudio2 libsndfile-dev espeak libzbar-dev ffmpeg
 
 RUN mkdir -p /app/
 
-WORKDIR /app/
+ENV PYTHONPATH=/app
 
-CMD "/start-reload.sh"
+EXPOSE 80
+
+CMD ["/start-reload.sh"]
