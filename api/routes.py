@@ -10,7 +10,6 @@ import sys
 from api import controller
 from api.config import application_name
 from api.models.TTS_model import TTS_model
-from api.models.STS_model import STS_model
 
 import os
 import uuid
