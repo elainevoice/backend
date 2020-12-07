@@ -1,15 +1,16 @@
 import tempfile
 
-from fastapi import APIRouter, File, HTTPException, UploadFile
+from fastapi import APIRouter, File, HTTPException, UploadFile, Header
 from fastapi.responses import (FileResponse, HTMLResponse, JSONResponse,
                                PlainTextResponse)
-from pydantic.main import BaseModel
+from pydantic.main import BaseModel, List
 from starlette.requests import Request
 import sys
 
 from api import controller
 from api.config import application_name
-from api.models.text_data import TextData
+from api.models.TTS_model import TTS_model
+from api.models.STS_model import STS_model
 
 import os
 import uuid
@@ -77,16 +78,16 @@ def crack_audio_oplossing(audio_name: str):
 
 
 @router.post('/taco')
-def text_to_tacotron_audio_file(data: TextData, model: str):
+def text_to_tacotron_audio_file(data: TTS_model):
     try:
-        wav_audio_file_path = controller.text_to_tacotron_audio_file(data.text, model)
+        wav_audio_file_path = controller.text_to_tacotron_audio_file(data.text, data.model)
         return FileResponse(str(wav_audio_file_path))
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
 
 @router.post('/taco_audio')
-async def audio_to_tacotron_audio_file(file: UploadFile = File(...), model: str = 'None'):
+async def audio_to_tacotron_audio_file(file: UploadFile = File(...), model = Header(None)):
     try:
         bytes = await file.read()
         unique_filename = str(uuid.uuid4())
@@ -112,11 +113,10 @@ async def audio_to_tacotron_audio_file(file: UploadFile = File(...), model: str 
         print(e)
         raise HTTPException(status_code=500, detail=str(e))
 
-@router.get('/get_models')
+@router.get('/get_models', response_model=List[str])
 def get_possible_models():
     try:
         result = controller.get_models()
-        print(result)
         return result
     except Exception as e:
         print(e)
