@@ -1,2 +1,2 @@
-lang = 'nl'
-application_name = 'Elaine Voice'
+lang = "nl"
+application_name = "Elaine Voice"
