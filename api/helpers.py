@@ -16,8 +16,6 @@ def get_taco_models():
     # got bs with relative path
     dir_path = os.path.dirname(os.path.realpath(__file__)).replace('\\', '/')
 
-    print([i for i in glob.iglob(f"{dir_path}/models/checkpoints/*/")])
-
     #get model folder names
     # step 1: removes static path
     # stap 2: removes thing like ['_tts', '_raw']
