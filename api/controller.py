@@ -23,5 +23,4 @@ def tts_create_audio_from_text(text):
 def text_to_tacotron_audio_file(text):
     tta = TacoTronAdapter()
     absolute_file_path = tta.generate_wav(text)
-    print(absolute_file_path)
     return absolute_file_path

@@ -17,7 +17,6 @@ class _SpeechToText:
 
     async def recognize_wav(self, spooled_temp_file):
         recognizer = sr.Recognizer()
-        print('a)')
         try:
             with sr.WavFile(spooled_temp_file) as audio_data:
                 audio = recognizer.record(audio_data)
@@ -35,7 +34,7 @@ class SttAdapter:
     async def recognize_audio_memory(self, path):
         try:
             text = await self.stt.recognize_wav(path)
-            print(f'aaa{text}')
+            print(f'We have recognized: {text}')
         except Exception as e:
             raise Exception(e)
         return text
