@@ -1,24 +1,13 @@
+import os
+import uuid
+
+import ffmpeg
+
+from api.helpers import get_taco_models
+from api.models.ffmpeg_adapter import FfmpegAdapter
 from api.models.stt import SttAdapter
 from api.models.taco_adapter import TacoTronAdapter
 from api.models.tts import TtsAdapter
-from api.helpers import get_taco_models
-
-
-async def stt_recognize_binary_audio_on_disk(spooled_temp_file):
-    stt_adapter = SttAdapter()
-    path_name, text = await stt_adapter.recognize_audio_disk(spooled_temp_file)
-    return path_name, text
-
-
-async def stt_recognize_binary_audio_in_memory(spooled_temp_file):
-    stt_adapter = SttAdapter()
-    return await stt_adapter.recognize_audio_memory(spooled_temp_file)
-
-
-def tts_create_audio_from_text(text):
-    tts_adapter = TtsAdapter()
-    audio_path = tts_adapter.create_wav(text)
-    return audio_path
 
 
 def text_to_tacotron_audio_file(text, model):
@@ -29,3 +18,23 @@ def text_to_tacotron_audio_file(text, model):
 
 def get_models():
     return get_taco_models()
+
+
+async def audio_to_tacotron_audio_file(bytes, model):
+    unique_filename = str(uuid.uuid4())
+    path = "temp/" + unique_filename + ".webm"
+    new_path = "temp/" + unique_filename + ".wav"
+
+    fa = FfmpegAdapter(bytes, path, new_path)
+    fa.run()
+
+    stt_adapter = SttAdapter()
+    text = await stt_adapter.recognize_audio_memory(new_path)
+
+    tta = TacoTronAdapter()
+    wav_audio_file_path = tta.generate_wav(text, model)
+
+    os.remove(path)
+    os.remove(new_path)
+
+    return wav_audio_file_path
