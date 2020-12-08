@@ -6,7 +6,10 @@ from gtts import gTTS
 
 class _TextToSpeech:
     @staticmethod
-    def create_wav(text, file_name=f'result_{str(datetime.now().strftime("%d-%m-%Y_%H-%M-%S"))}.wav'):
+    def create_wav(
+        text,
+        file_name=f'result_{str(datetime.now().strftime("%d-%m-%Y_%H-%M-%S"))}.wav',
+    ):
 
         save_path = f"./assets/data/results/{file_name}"
         speech_result = gTTS(text=text, lang=lang, slow=False)
