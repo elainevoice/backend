@@ -19,7 +19,7 @@ def home():
 
 
 @router.post('/taco')
-def text_to_tacotron_audio_file(data: TTSModel, model= Header(None)):
+def text_to_tacotron_audio_file(data: TTSModel, model=Header(None)):
     try:
         wav_audio_file_path = controller.text_to_tacotron_audio_file(data.text, model)
         return FileResponse(str(wav_audio_file_path))
@@ -28,13 +28,12 @@ def text_to_tacotron_audio_file(data: TTSModel, model= Header(None)):
 
 
 @router.post('/taco_audio')
-async def audio_to_tacotron_audio_file(file: UploadFile = File(...), model= Header(None)):
-
+async def audio_to_tacotron_audio_file(file: UploadFile = File(...), model=Header(None)):
     try:
         bytes = await file.read()
         if len(bytes) == 1:
             raise NotImplementedError(
-                "We cannot provide translations of no sound, check your mic settings tyvm"
+                "No audio has been provided, check your microphone."
             )
         unique_filename = str(uuid.uuid4())
         path = "temp/" + unique_filename + ".webm"

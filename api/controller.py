@@ -29,4 +29,3 @@ def text_to_tacotron_audio_file(text, model):
 
 def get_models():
     return get_taco_models()
-

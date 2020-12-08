@@ -46,7 +46,7 @@ class SttAdapter:
         try:
             destination = f"./assets/data/results/{file_name}"
             with open(destination, "wb+") as file:
-                # Kon nergens goed vinden hoe memory intensive dit is, dus misschien moet dit in chunks maar idk
+                # Eventually rewrite this to chunks for memory improvement
                 file.write(spooled_temp_file.read())
                 print(spooled_temp_file.read())
                 text = await self.stt.recognize_wav(file)
