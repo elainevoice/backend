@@ -122,7 +122,6 @@ async def audio_to_tacotron_audio_file(file: UploadFile = File(...), model = Hea
 @router.get('/get_models', response_model=List[str])
 def get_available_models():
     try:
-        result = controller.get_models()
-        return result
+        return controller.get_models()
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
