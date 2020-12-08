@@ -19,7 +19,7 @@ def get_taco_models():
     #get model folder names
     # step 1: removes static path
     # stap 2: removes thing like ['_tts', '_raw']
-    model_folders = [i.split('checkpoints/')[1].split('_')[0] for i in glob.iglob(f"{dir_path}/models/checkpoints/*/")]
+    model_folders = [i.replace('\\', '/').split('checkpoints/')[1].split('_')[0] for i in glob.iglob(f"{dir_path}/models/checkpoints/*/")]
 
     # remove duplicates
     return list(dict.fromkeys(model_folders))
