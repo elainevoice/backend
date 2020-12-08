@@ -26,6 +26,7 @@ def text_to_tacotron_audio_file(text, model):
     absolute_file_path = tta.generate_wav(text, model)
     return absolute_file_path
 
+
 def get_models():
     return get_taco_models()
 

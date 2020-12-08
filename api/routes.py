@@ -1,15 +1,12 @@
-import tempfile
-
 from fastapi import APIRouter, File, HTTPException, UploadFile, Header
 from fastapi.responses import (FileResponse, HTMLResponse, JSONResponse,
                                PlainTextResponse)
-from pydantic.main import BaseModel, List
+from pydantic.main import List
 from starlette.requests import Request
-import sys
 
 from api import controller
 from api.config import application_name
-from api.models.TTS_model import TTS_model
+from api.models.TTS_model import TTSModel
 
 import os
 import uuid
@@ -114,14 +111,13 @@ async def audio_to_tacotron_audio_file(file: UploadFile = File(...), model = Hea
 
         return FileResponse(str(wav_audio_file_path))
     except Exception as e:
-        print(e)
         raise HTTPException(status_code=500, detail=str(e))
 
+
 @router.get('/get_models', response_model=List[str])
-def get_possible_models():
+def get_available_models():
     try:
         result = controller.get_models()
         return result
     except Exception as e:
-        print(e)
         raise HTTPException(status_code=500, detail=str(e))
