@@ -22,5 +22,5 @@ def get_taco_models():
     # step 3: remove everything after underscore like ['_tts', '_raw']
     model_folders = [i.replace('\\', '/').split('checkpoints/')[1].split('_')[0] for i in glob.iglob(f"{dir_path}/models/checkpoints/*/")]
 
-    # verwijder dubbele
+    # remove duplicates
     return list(dict.fromkeys(model_folders))
