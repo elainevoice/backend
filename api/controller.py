@@ -34,4 +34,4 @@ async def audio_to_tacotron_audio_file(bytes, model):
     os.remove(path)
     os.remove(new_path)
 
-    return wav_audio_file_path
+    return wav_audio_file_path, text

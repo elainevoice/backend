@@ -47,11 +47,11 @@ async def audio_to_tacotron_audio_file(
                 "Too many chars: We provide this service for free, please paypal to: espirionludo@gmail.com to enable this feature."
             )
 
-        wav_audio_file_path = await controller.audio_to_tacotron_audio_file(
+        wav_audio_file_path, text = await controller.audio_to_tacotron_audio_file(
             bytes, model
         )
 
-        return FileResponse(str(wav_audio_file_path))
+        return FileResponse(str(wav_audio_file_path), headers={'text': text})
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
