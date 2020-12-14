@@ -8,6 +8,7 @@ from api.models.TTS_model import TTSModel
 
 router = APIRouter()
 
+MAX_CHARACTERS = 550
 
 class NotVIPplsPAYError(Exception):
     pass
@@ -22,9 +23,9 @@ def home():
 def text_to_tacotron_audio_file(data: TTSModel, model=Header(None)):
     try:
         text = data.text
-        if len(text) > 550:
+        if len(text) > MAX_CHARACTERS:
             raise NotVIPplsPAYError(
-                "Too many chars: We provide this service for free, please paypal to: espirionludo@gmail.com to enable this feature."
+                "Too many chararacters."
             )
         wav_audio_file_path = controller.text_to_tacotron_audio_file(data.text, model)
         return FileResponse(str(wav_audio_file_path))
@@ -44,7 +45,7 @@ async def audio_to_tacotron_audio_file(
             )
         if len(bytes) > 120000:
             raise NotVIPplsPAYError(
-                "Too many chars: We provide this service for free, please paypal to: espirionludo@gmail.com to enable this feature."
+                "Too many bytes."
             )
 
         wav_audio_file_path, text = await controller.audio_to_tacotron_audio_file(
