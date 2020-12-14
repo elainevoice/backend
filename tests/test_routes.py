@@ -6,9 +6,10 @@ from fastapi.testclient import TestClient
 import sys
 sys.path.append(sys.path[0] + '/..')
 
-import os, random, string
+import random, string
 
 from api.routes import router, MAX_CHARACTERS
+
 
 class TestRoutes(unittest.TestCase):
     client = None
@@ -94,6 +95,6 @@ class TestRoutes(unittest.TestCase):
         except HTTPException as e:
             pass
 
+
 if __name__ == '__main__':
     unittest.main()
-    
