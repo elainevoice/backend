@@ -1,13 +1,10 @@
 import os
 import uuid
 
-import ffmpeg
-
 from api import helpers
 from api.models.ffmpeg_adapter import FfmpegAdapter
 from api.models.stt import SttAdapter
 from api.models.taco_adapter import TacoTronAdapter
-from api.models.tts import TtsAdapter
 
 
 def text_to_tacotron_audio_file(text, model):

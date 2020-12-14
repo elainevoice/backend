@@ -7,33 +7,36 @@ class Paths:
     def __init__(self, data_path, voc_id, tts_id):
         self.base = Path(__file__).parent.parent.expanduser().resolve()
 
+        # Commented out to prevent useless variables from being generated for performance
+        # Might get used later on when multiple vocoders have been trained.
+
         # Data Paths
-        self.data = Path(data_path).expanduser().resolve()
-        self.quant = self.data/'quant'
-        self.mel = self.data/'mel'
-        self.gta = self.data/'gta'
-        self.alg = self.data/'alg'
-        self.raw_pitch = self.data/'raw_pitch'
-        self.phon_pitch = self.data/'phon_pitch'
+        # self.data = Path(data_path).expanduser().resolve()
+        # self.quant = self.data/'quant'
+        # self.mel = self.data/'mel'
+        # self.gta = self.data/'gta'
+        # self.alg = self.data/'alg'
+        # self.raw_pitch = self.data/'raw_pitch'
+        # self.phon_pitch = self.data/'phon_pitch'
 
         # WaveRNN/Vocoder Paths
-        self.voc_checkpoints = self.base/'checkpoints'/f'{voc_id}.wavernn'
-        self.voc_top_k = self.voc_checkpoints/'top_k_models'
-        self.voc_latest_weights = self.voc_checkpoints/'latest_weights.pyt'
-        self.voc_latest_optim = self.voc_checkpoints/'latest_optim.pyt'
-        self.voc_output = self.base/'model_outputs'/f'{voc_id}.wavernn'
-        self.voc_step = self.voc_checkpoints/'step.npy'
-        self.voc_log = self.voc_checkpoints/'tensorboard'
+        # self.voc_checkpoints = self.base/'checkpoints'/f'{voc_id}.wavernn'
+        # self.voc_top_k = self.voc_checkpoints/'top_k_models'
+        # self.voc_latest_weights = self.voc_checkpoints/'latest_weights.pyt'
+        # self.voc_latest_optim = self.voc_checkpoints/'latest_optim.pyt'
+        # self.voc_output = self.base/'model_outputs'/f'{voc_id}.wavernn'
+        # self.voc_step = self.voc_checkpoints/'step.npy'
+        # self.voc_log = self.voc_checkpoints/'tensorboard'
 
-        # Tactron Paths
-        self.tts_checkpoints = self.base/'checkpoints'/f'{tts_id}.tacotron'
-        self.tts_latest_weights = self.tts_checkpoints/'latest_weights.pyt'
-        self.tts_latest_optim = self.tts_checkpoints/'latest_optim.pyt'
-        self.tts_output = self.base/'model_outputs'/f'{tts_id}.tacotron'
-        self.tts_step = self.tts_checkpoints/'step.npy'
-        self.tts_log = self.tts_checkpoints/'tensorboard'
-        self.tts_attention = self.tts_checkpoints/'attention'
-        self.tts_mel_plot = self.tts_checkpoints/'mel_plots'
+        # Tacotron Paths
+        # self.tts_checkpoints = self.base/'checkpoints'/f'{tts_id}.tacotron'
+        # self.tts_latest_weights = self.tts_checkpoints/'latest_weights.pyt'
+        # self.tts_latest_optim = self.tts_checkpoints/'latest_optim.pyt'
+        # self.tts_output = self.base/'model_outputs'/f'{tts_id}.tacotron'
+        # self.tts_step = self.tts_checkpoints/'step.npy'
+        # self.tts_log = self.tts_checkpoints/'tensorboard'
+        # self.tts_attention = self.tts_checkpoints/'attention'
+        # self.tts_mel_plot = self.tts_checkpoints/'mel_plots'
 
         # Forward Tacotron Paths
         self.forward_checkpoints = self.base/'checkpoints'/f'{tts_id}.forward'
@@ -48,7 +51,7 @@ class Paths:
         self.create_paths()
 
     def create_paths(self):
-        # Commented out to prevent a useless data folder from being created
+        """Commented out to prevent useless folders from being generated for performance"""
 
         # os.makedirs(self.data, exist_ok=True)
         # os.makedirs(self.quant, exist_ok=True)
@@ -58,17 +61,19 @@ class Paths:
         # os.makedirs(self.raw_pitch, exist_ok=True)
         # os.makedirs(self.phon_pitch, exist_ok=True)
 
-        os.makedirs(self.voc_checkpoints, exist_ok=True)
-        os.makedirs(self.voc_top_k, exist_ok=True)
-        os.makedirs(self.voc_output, exist_ok=True)
-        os.makedirs(self.tts_checkpoints, exist_ok=True)
-        os.makedirs(self.tts_output, exist_ok=True)
-        os.makedirs(self.tts_attention, exist_ok=True)
-        os.makedirs(self.tts_mel_plot, exist_ok=True)
+        # os.makedirs(self.voc_checkpoints, exist_ok=True)
+        # os.makedirs(self.voc_top_k, exist_ok=True)
+        # os.makedirs(self.voc_output, exist_ok=True)
+
+        # os.makedirs(self.tts_checkpoints, exist_ok=True)
+        # os.makedirs(self.tts_output, exist_ok=True)
+        # os.makedirs(self.tts_attention, exist_ok=True)
+        # os.makedirs(self.tts_mel_plot, exist_ok=True)
+
         os.makedirs(self.forward_checkpoints, exist_ok=True)
         os.makedirs(self.forward_output, exist_ok=True)
-        os.makedirs(self.forward_attention, exist_ok=True)
-        os.makedirs(self.forward_mel_plot, exist_ok=True)
+        # os.makedirs(self.forward_attention, exist_ok=True)
+        # os.makedirs(self.forward_mel_plot, exist_ok=True)
 
     def get_tts_named_weights(self, name):
         """Gets the path for the weights in a named tts checkpoint."""
