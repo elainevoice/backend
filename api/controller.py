@@ -3,7 +3,7 @@ import uuid
 
 import ffmpeg
 
-from api.helpers import get_taco_models
+from api import helpers
 from api.models.ffmpeg_adapter import FfmpegAdapter
 from api.models.stt import SttAdapter
 from api.models.taco_adapter import TacoTronAdapter
@@ -17,7 +17,7 @@ def text_to_tacotron_audio_file(text, model):
 
 
 def get_models():
-    return get_taco_models()
+    return helpers.get_taco_models()
 
 
 async def audio_to_tacotron_audio_file(bytes, model):
