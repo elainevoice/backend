@@ -2,9 +2,11 @@ import pathlib
 import os
 from pydub import AudioSegment
 import pandas as pd
-
+import csv
+import shutil
 
 class Utils:
+
     @staticmethod
     def mp3_to_wav(path):
         try:
@@ -32,7 +34,77 @@ class Utils:
             except:
                 pass
 
+    @staticmethod
+    def rename_dysarthia():
+        k = 1
+        chars = "\n,![].?'#/"
+        basepath = 'C:/Users/quiri/Desktop/Elaine/datasets/dysarthria/'
+        dest = basepath + 'All/'
+        data = {
+            0: {
+                'name': 'F01',
+                'noSessions': 1
+            },
+            1: {
+                'name': 'F03',
+                'noSessions': 3
+            },
+            2: {
+                'name': 'F04',
+                'noSessions': 2
+            }
+        }
+
+        for i in data:
+            path = basepath + data[i]['name']
+            print(path)
+
+            for j in range(data[i]['noSessions']):
+                prompts = path + f'/Session{j+1}/prompts'
+                wavs = path + f'/Session{j+1}/audio'
+
+                for file in os.listdir(prompts):
+                    with open(prompts + '/' + file) as f:
+                        prompt = f.readlines()[0]
+                        for c in chars:
+                            prompt = prompt.replace(c, "")
+                        prompt = prompt.replace(" ", "_").lower()
+                        old_file = os.path.join(wavs + '/', file)
+                        shutil.copy(old_file[:-3] + 'wav', dest)
+                        while True:
+                            try:
+                                prefix = f"{data[i]['name']}_{j+1}_{k}#"
+                                new_filename = f"{dest}{prefix + prompt}.wav"
+                                os.rename(f"{dest}{file[:-3]}wav", new_filename)
+                                k = 1
+                                break
+                            except Exception as e:
+                                if k == 10:
+                                    break
+                                else:
+                                    print(e)
+                                    k += 1
+    @staticmethod
+    def generate_csv():
+        basepath = 'C:/Users/quiri/Desktop/Elaine/datasets/dysarthria/All/'
+        data_sentences = []
+
+        for file in os.listdir(basepath):
+            filename = file[:-4]
+            print(filename)
+            prompt = filename.split('#')[1].lower()
+            prompt_normaal = prompt.replace('_', ' ')
+            row = [filename, prompt_normaal, prompt_normaal]
+            data_sentences.append(row)
+
+        with open('data.csv', 'w', newline='') as file:
+            writer = csv.writer(file, delimiter='|')
+            writer.writerows(data_sentences)
+
+
 
 def format_wavs():
     Utils.mp3_to_wav("../../assets/data/sounds_mp3/sentences")
     Utils.mp3_to_wav("../../assets/data/sounds_mp3/words")
+
+Utils.generate_csv()
