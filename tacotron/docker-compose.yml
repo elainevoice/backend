@@ -1,11 +1,12 @@
 version: '2'
 services:
-  forward_tacotron:
-    build: .
-    ports:
-      - 9999:9999
-    volumes:
-        - ../assets/data:/root/ForwardTacotron/data
-    environment:
-      - PASSWORD=secret
-    tty: true
+    forward_tacotron:
+        build: .
+        ports:
+            - 9999:9999
+            - 6006:6006
+        volumes:
+            - ../../datasets:/root/ForwardTacotron/datasets
+        environment:
+            - PASSWORD=secret
+        tty: true
