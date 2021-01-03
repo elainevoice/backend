@@ -138,3 +138,4 @@ dmypy.json
 # Elaine Voice
 temp/*
 api/models/model_outputs/*/*.wav
+tacotron/checkpoints
