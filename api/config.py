@@ -2,4 +2,4 @@ lang = "nl"
 application_name = "Elaine Voice"
 
 
-models = ["Whistle", "Ljspeech"]
+models = ["Whistle", "Ljspeech", "Isixhosa"]

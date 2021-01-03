@@ -5,7 +5,6 @@ services:
     ports:
       - 9999:9999
     volumes:
-        - ../assets/data:/root/ForwardTacotron/data
-    environment:
-      - PASSWORD=secret
+        - ../../datasets:/root/ForwardTacotron/data
+        - ./checkpoints:/root/ForwardTacotron/checkpoints
     tty: true
