@@ -38,11 +38,12 @@ RUN apt-get update \
 # install ffmpeg
 RUN apt-get install -y ffmpeg
 
+# Avoid possible error
+RUN pip uninstall ffmpeg-python ffmpeg
+RUN pip install ffmpeg-python ffmpeg
+
 # create the app directory
 RUN mkdir -p /app/
 
 # set the work directory to the newly created directory.
 WORKDIR /app/
-
-# start the api
-CMD "/start-reload.sh"
