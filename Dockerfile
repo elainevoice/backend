@@ -39,7 +39,6 @@ RUN apt-get update \
 RUN apt-get install -y ffmpeg
 
 # Avoid possible error
-RUN pip uninstall ffmpeg-python ffmpeg
 RUN pip install ffmpeg-python ffmpeg
 
 # create the app directory
