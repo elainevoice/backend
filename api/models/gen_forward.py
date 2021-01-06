@@ -18,8 +18,8 @@ class GenForward:
         self.max_iter = 32
         self.input_text = input_text
         self.data_path = "data/"
-        self.voc_model_id = f"{model}_raw"
-        self.tts_model_id = f"{model}_tts"
+        self.voc_model_id = f"{model}_raw".lower()
+        self.tts_model_id = f"{model}_tts".lower()
         self.paths = Paths(self.data_path, self.voc_model_id, self.tts_model_id)
 
     def generate_wav(self):
