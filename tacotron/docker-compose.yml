@@ -7,6 +7,7 @@ services:
             - 6006:6006
         volumes:
             - ../../datasets:/root/ForwardTacotron/datasets
+            - ./checkpoints:/root/ForwardTacotron/checkpoints
         environment:
             - PASSWORD=secret
         tty: true
