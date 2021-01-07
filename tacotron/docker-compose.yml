@@ -1,13 +1,10 @@
 version: '2'
 services:
-    forward_tacotron:
-        build: .
-        ports:
-            - 9999:9999
-            - 6006:6006
-        volumes:
-            - ../../datasets:/root/ForwardTacotron/datasets
-            - ./checkpoints:/root/ForwardTacotron/checkpoints
-        environment:
-            - PASSWORD=secret
-        tty: true
+  forward_tacotron:
+    build: .
+    ports:
+      - 9999:9999
+    volumes:
+        - ../../datasets:/root/ForwardTacotron/data
+        - ./checkpoints:/root/ForwardTacotron/checkpoints
+    tty: true
