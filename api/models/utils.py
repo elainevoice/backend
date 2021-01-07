@@ -35,10 +35,9 @@ class Utils:
                 pass
 
     @staticmethod
-    def rename_dysarthia():
+    def rename_dysarthia(basepath: str):
         k = 1
         chars = "\n,![].?'#/"
-        basepath = 'C:/Users/quiri/Desktop/Elaine/datasets/dysarthria/'
         dest = basepath + 'All/'
         data = {
             0: {
@@ -84,9 +83,9 @@ class Utils:
                                 else:
                                     print(e)
                                     k += 1
+
     @staticmethod
-    def generate_csv():
-        basepath = 'C:/Users/quiri/Desktop/Elaine/datasets/dysarthria/All/'
+    def generate_csv(basepath):
         data_sentences = []
 
         for file in os.listdir(basepath):
@@ -102,9 +101,6 @@ class Utils:
             writer.writerows(data_sentences)
 
 
-
 def format_wavs():
     Utils.mp3_to_wav("../../assets/data/sounds_mp3/sentences")
     Utils.mp3_to_wav("../../assets/data/sounds_mp3/words")
-
-Utils.generate_csv()
