@@ -54,25 +54,31 @@ class Utils:
             }
         }
 
-        for i in data:
-            path = basepath + data[i]['name']
-            print(path)
+        # Loop over the different people/sessions.
+        for person in data:
+            path = basepath + data[person]['name']
 
-            for j in range(data[i]['noSessions']):
-                prompts = path + f'/Session{j+1}/prompts'
-                wavs = path + f'/Session{j+1}/audio'
+            for sessionId in range(data[person]['noSessions']):
+                prompts = path + f'/Session{sessionId+1}/prompts'
+                wavs = path + f'/Session{sessionId+1}/audio'
 
                 for file in os.listdir(prompts):
                     with open(prompts + '/' + file) as f:
                         prompt = f.readlines()[0]
+
+                        # Replace forbidden chars.
                         for c in chars:
                             prompt = prompt.replace(c, "")
+
+                        # Replace spaces in prompt to underscore and rename the file from ID to prompt.
                         prompt = prompt.replace(" ", "_").lower()
                         old_file = os.path.join(wavs + '/', file)
                         shutil.copy(old_file[:-3] + 'wav', dest)
+
                         while True:
                             try:
-                                prefix = f"{data[i]['name']}_{j+1}_{k}#"
+                                # Try renaming the file, if it fails, up the count with 1 since duplicate promps exists.
+                                prefix = f"{data[person]['name']}_{sessionId+1}_{k}#"
                                 new_filename = f"{dest}{prefix + prompt}.wav"
                                 os.rename(f"{dest}{file[:-3]}wav", new_filename)
                                 k = 1
