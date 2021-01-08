@@ -38,6 +38,7 @@ class Utils:
                 except:
                     pass
 
+    # Should be the sounds_wav folder of the Whistling dataset
     @staticmethod
     def generate_csv_whistle(basepath):
         directory_sentences = basepath + "/sentences"
@@ -58,15 +59,15 @@ class Utils:
             row = [nederlands, nederlands_normaal, nederlands_normaal]
             data_woorden.append(row)
 
-        with open('words.csv', 'w', newline='') as file:
+        with open(basepath + '/metadata_words.csv', 'w', newline='') as file:
             writer = csv.writer(file, delimiter='|')
             writer.writerows(data_woorden)
 
-        with open('sentences.csv', 'w', newline='') as file:
+        with open(basepath + '/metadata_sentences.csv', 'w', newline='') as file:
             writer = csv.writer(file, delimiter='|')
             writer.writerows(data_sentences)
 
-        with open('both.csv', 'w', newline='') as file:
+        with open(basepath + '/metadata_both.csv', 'w', newline='') as file:
             writer = csv.writer(file, delimiter='|')
             writer.writerows(data_woorden + data_sentences)
 
@@ -126,18 +127,26 @@ class Utils:
                                     print(e)
                                     k += 1
 
+    # Should be the /All folder of the dysarthria dataset
     @staticmethod
     def generate_csv_dysarthria(basepath):
+        csv_path = basepath[:-4]
         data_sentences = []
 
-        for file in os.listdir(basepath):
-            filename = file[:-4]
-            print(filename)
-            prompt = filename.split('#')[1].lower()
-            prompt_normaal = prompt.replace('_', ' ')
-            row = [filename, prompt_normaal, prompt_normaal]
-            data_sentences.append(row)
+        try:
+            for file in os.listdir(basepath):
+                filename = file[:-4]
+                print(filename)
+                prompt = filename.split('#')[1].lower()
+                prompt_normaal = prompt.replace('_', ' ')
+                row = [filename, prompt_normaal, prompt_normaal]
+                data_sentences.append(row)
 
-        with open('data.csv', 'w', newline='') as file:
-            writer = csv.writer(file, delimiter='|')
-            writer.writerows(data_sentences)
+            with open(csv_path + '/metadata.csv', 'w', newline='') as file:
+                writer = csv.writer(file, delimiter='|')
+                writer.writerows(data_sentences)
+        except:
+            print('Unable to generate CSV, does the /All folder only contain .wavs?')
+
+
+Utils.generate_csv_dysarthria("C:/Users/quiri/Desktop/Elaine/datasets/dysarthria/All")
