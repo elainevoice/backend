@@ -5,6 +5,7 @@ import pandas as pd
 import csv
 import shutil
 
+
 class Utils:
 
     @staticmethod
@@ -18,21 +19,56 @@ class Utils:
             print(e)
 
     @staticmethod
-    def rename_wav():
-        words = pd.read_csv("../assets/data/words_dict_nl.csv")
-        sentences = pd.read_csv("../assets/data/sentences_dict_nl.csv")
+    def rename_whistle(basepath):
+        types = {
+            'words': pd.read_csv(basepath + "/words_dict_nl.csv"),
+            'sentences': pd.read_csv(basepath + "/sentences_dict_nl.csv")
+        }
 
-        directory = "../assets/data/sounds_wav/sentences"
-        for filename in os.listdir(directory):
-            turks = filename[:-4].lower()
-            match = sentences.loc[sentences["turks"] == f"sounds/sentences/{turks}.mp3"]
-            nederlands = match["nederlands"].item().replace(" ", "_")
-            old_file = os.path.join(directory, filename)
-            new_filename = old_file.replace(turks, nederlands)
-            try:
-                os.rename(old_file, new_filename)
-            except:
-                pass
+        for name, value in types.items():
+            directory = basepath + f"/sounds_wav/{name}"
+            for filename in os.listdir(directory):
+                turks = filename[:-4].lower()
+                match = value.loc[value["turks"] == f"sounds/sentences/{turks}.mp3"]
+                nederlands = match["nederlands"].item().replace(" ", "_")
+                old_file = os.path.join(directory, filename)
+                new_filename = old_file.replace(turks, nederlands)
+                try:
+                    os.rename(old_file, new_filename)
+                except:
+                    pass
+
+    @staticmethod
+    def generate_csv_whistle(basepath):
+        directory_sentences = basepath + "/sentences"
+        directory_words = basepath + "/words"
+
+        data_sentences = []
+        data_woorden = []
+
+        for filename in os.listdir(directory_sentences):
+            nederlands = filename[:-4].lower()
+            nederlands_normaal = nederlands.replace('_', ' ')
+            row = [nederlands, nederlands_normaal, nederlands_normaal]
+            data_sentences.append(row)
+
+        for filename in os.listdir(directory_words):
+            nederlands = filename[:-4].lower()
+            nederlands_normaal = nederlands.replace('_', ' ')
+            row = [nederlands, nederlands_normaal, nederlands_normaal]
+            data_woorden.append(row)
+
+        with open('words.csv', 'w', newline='') as file:
+            writer = csv.writer(file, delimiter='|')
+            writer.writerows(data_woorden)
+
+        with open('sentences.csv', 'w', newline='') as file:
+            writer = csv.writer(file, delimiter='|')
+            writer.writerows(data_sentences)
+
+        with open('both.csv', 'w', newline='') as file:
+            writer = csv.writer(file, delimiter='|')
+            writer.writerows(data_woorden + data_sentences)
 
     @staticmethod
     def rename_dysarthia(basepath: str):
@@ -59,8 +95,8 @@ class Utils:
             path = basepath + data[person]['name']
 
             for sessionId in range(data[person]['noSessions']):
-                prompts = path + f'/Session{sessionId+1}/prompts'
-                wavs = path + f'/Session{sessionId+1}/audio'
+                prompts = path + f'/Session{sessionId + 1}/prompts'
+                wavs = path + f'/Session{sessionId + 1}/audio'
 
                 for file in os.listdir(prompts):
                     with open(prompts + '/' + file) as f:
@@ -78,7 +114,7 @@ class Utils:
                         while True:
                             try:
                                 # Try renaming the file, if it fails, up the count with 1 since duplicate promps exists.
-                                prefix = f"{data[person]['name']}_{sessionId+1}_{k}#"
+                                prefix = f"{data[person]['name']}_{sessionId + 1}_{k}#"
                                 new_filename = f"{dest}{prefix + prompt}.wav"
                                 os.rename(f"{dest}{file[:-3]}wav", new_filename)
                                 k = 1
@@ -91,7 +127,7 @@ class Utils:
                                     k += 1
 
     @staticmethod
-    def generate_csv(basepath):
+    def generate_csv_dysarthria(basepath):
         data_sentences = []
 
         for file in os.listdir(basepath):
@@ -105,8 +141,3 @@ class Utils:
         with open('data.csv', 'w', newline='') as file:
             writer = csv.writer(file, delimiter='|')
             writer.writerows(data_sentences)
-
-
-def format_wavs():
-    Utils.mp3_to_wav("../../assets/data/sounds_mp3/sentences")
-    Utils.mp3_to_wav("../../assets/data/sounds_mp3/words")
